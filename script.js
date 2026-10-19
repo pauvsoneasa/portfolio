@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Design Feed & Story",
       title: "Design Feed & Story",
       client: "Borann Center, BG Cream & Socheat Skin Care",
-      year: "Tahun 2023 – 2024",
+      year: "Year 2024 – 2026",
       desc: "Multi-channel high-engagement promotional carousels, feed banners, and story sets engineered with high-impact product cutouts, typography hierarchy, and cosmetic color staging.",
       bullets: [
         "Instagram & Facebook Feed Posters",
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Design Logo & Brand",
       title: "Design Logo & Brand",
       client: "CSL Travel, BRT Home Solutions & Corporate Identity",
-      year: "Tahun 2023 – 2024",
+      year: "Year 2024 – 2026",
       desc: "Minimalist vector identity systems, executive business cards with foil accents, legal digital company stamps, and complete corporate stationery standards.",
       bullets: [
         "Vector Master Logomarks & Rubber Stamps",
@@ -293,10 +293,10 @@ document.addEventListener('DOMContentLoaded', () => {
       projectId: 16
     },
     {
-      category: "Design Brosur & Print",
-      title: "Design Brosur & Print",
+      category: "Brochures & Print",
+      title: "Brochures & Editorial Print",
       client: "CSL Travel & Tours & BRT Home Solutions",
-      year: "Tahun 2023 – 2024",
+      year: "Year 2024 – 2026",
       desc: "Prepress-ready print collateral, multi-fold corporate brochures, service rate sheets, and international flight tour itinerary decks with CMYK offset specifications.",
       bullets: [
         "Tri-fold Corporate & Tourism Brochures",
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Photo & Packaging",
       title: "Photo & Packaging",
       client: "Kroung Meung Spices & Tbal Khmer Culinary",
-      year: "Tahun 2023 – 2024",
+      year: "Year 2024 – 2026",
       desc: "Mouth-watering culinary photo styling, retail supermarket shelf packaging headers, authentic spice paste labels, and high-frequency cosmetic skin retouching.",
       bullets: [
         "FMCG Supermarket Packaging & Shelf Headers",
@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Art & Vector",
       title: "Art & Vector",
       client: "National Heritage Series & Sabara Angkor Luxury",
-      year: "Tahun 2023 – 2024",
+      year: "Year 2024 – 2026",
       desc: "Regal Cambodian cultural tributes, classical golden filigree ornaments, royal crest vector modernization, and large-format architectural event backdrops.",
       bullets: [
         "Khmer Royal Crests & Traditional Filigree",

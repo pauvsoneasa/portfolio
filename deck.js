@@ -135,20 +135,31 @@ document.addEventListener('DOMContentLoaded', () => {
   let interactionUnlocked = false;
   function listenForFirstInteraction() {
     if (interactionUnlocked) return;
-    const unlockEvents = ['pointerdown', 'keydown', 'touchstart', 'wheel', 'scroll'];
+    const unlockEvents = ['click', 'pointerdown', 'mousedown', 'keydown', 'touchstart', 'wheel', 'scroll'];
     function onFirstUserGesture() {
       interactionUnlocked = true;
-      unlockEvents.forEach(evt => window.removeEventListener(evt, onFirstUserGesture));
+      unlockEvents.forEach(evt => {
+        window.removeEventListener(evt, onFirstUserGesture);
+        document.removeEventListener(evt, onFirstUserGesture);
+      });
       if (musicDesiredState && bgAudio && bgAudio.paused) {
         playBgMusic();
       }
     }
-    unlockEvents.forEach(evt => window.addEventListener(evt, onFirstUserGesture, { once: true, passive: true }));
+    unlockEvents.forEach(evt => {
+      window.addEventListener(evt, onFirstUserGesture, { once: true, passive: true });
+      document.addEventListener(evt, onFirstUserGesture, { once: true, passive: true });
+    });
   }
 
   if (bgAudio) {
     bgAudio.volume = TARGET_VOLUME;
     bgAudio.loop = true;
+    // Explicit ended fallback to guarantee continuous gapless looping on all browsers
+    bgAudio.addEventListener('ended', () => {
+      bgAudio.currentTime = 0;
+      bgAudio.play().catch(() => {});
+    });
     if (musicDesiredState) {
       playBgMusic();
     } else {
@@ -259,6 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
     slideStartTime = performance.now();
     cancelAnimationFrame(progressRaf);
     progressRaf = requestAnimationFrame(updateProgressLoop);
+
+    // Autoplay background music together with deck playback
+    if (musicDesiredState && bgAudio && bgAudio.paused) {
+      playBgMusic();
+    }
+
     if (toastMsg) showToast(toastMsg);
   }
 
