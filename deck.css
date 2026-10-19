@@ -247,6 +247,7 @@ body {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 /* Glowing 4-Point Star Spark (Ryan Saputra Signature Orbit & Pulse) */
@@ -617,7 +618,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 40px;
+  padding: clamp(20px, 3vh, 36px) clamp(24px, 4vw, 48px);
   position: relative;
 }
 
@@ -629,24 +630,37 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: clamp(14px, 2.2vh, 26px) clamp(24px, 4vw, 48px);
+  gap: 4px;
+}
+
+/* Crisp engineered hairline boundary seams between colored and white zones */
+.slide-h-top-red .h-white-band {
+  box-shadow: 0 -1px 0 rgba(4, 9, 138, 0.08);
+  border-top: 1px solid rgba(4, 9, 138, 0.05);
+}
+
+.slide-h-top-white .h-red-band {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .h-slide-title {
   font-family: var(--font-anton);
-  font-size: clamp(40px, 5.5vw, 76px);
+  font-size: clamp(38px, 5.2vw, 74px);
   color: var(--red);
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.02;
   text-align: center;
+  margin-bottom: 3px;
 }
 
 .h-slide-sub {
   font-family: var(--font-bebas);
-  font-size: clamp(16px, 1.8vw, 24px);
-  color: #666666;
-  letter-spacing: 0.08em;
-  margin-top: 6px;
+  font-size: clamp(15px, 1.7vw, 23px);
+  color: #555555;
+  letter-spacing: 0.09em;
   text-align: center;
 }
 
@@ -658,10 +672,10 @@ body {
   height: 100%;
 }
 
-/* Vertical Split: Left Red (52%) / Right White (48%) */
+/* Vertical Split: Left Red (56%) / Right White (44%) - Perfect Symmetry */
 .slide-v-left-red {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 56% 44%;
   width: 100%;
   height: 100%;
 }
@@ -672,7 +686,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 30px;
+  padding: clamp(24px, 4vh, 48px) clamp(24px, 3.5vw, 44px);
   position: relative;
 }
 
@@ -682,39 +696,49 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 60px 50px;
+  padding: clamp(36px, 5.5vh, 64px) clamp(36px, 4.5vw, 60px);
   position: relative;
+}
+
+.slide-v-left-red .v-white-pane {
+  box-shadow: -1px 0 0 rgba(4, 9, 138, 0.06);
+  border-left: 1px solid rgba(4, 9, 138, 0.05);
+}
+
+.slide-v-left-white .v-red-pane {
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.16);
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .v-slide-title {
   font-family: var(--font-anton);
-  font-size: clamp(48px, 6.8vw, 92px);
+  font-size: clamp(44px, 6.2vw, 86px);
   color: var(--red);
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  line-height: 0.95;
-  margin-bottom: 10px;
+  line-height: 0.96;
+  margin-bottom: 12px;
 }
 
 .v-slide-sub {
   font-family: var(--font-bebas);
-  font-size: clamp(18px, 2.2vw, 28px);
-  color: #666666;
+  font-size: clamp(17px, 2vw, 26px);
+  color: #555555;
   letter-spacing: 0.08em;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .v-slide-desc {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #555555;
-  max-width: 38ch;
+  font-size: clamp(14.5px, 1.15vw, 16px);
+  line-height: 1.7;
+  color: #4b5563;
+  max-width: 42ch;
 }
 
-/* Vertical Split: Left White (48%) / Right Red (52%) */
+/* Vertical Split: Left White (44%) / Right Red (56%) - Perfect Symmetrical Inverse */
 .slide-v-left-white {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
+  grid-template-columns: 44% 56%;
   width: 100%;
   height: 100%;
 }

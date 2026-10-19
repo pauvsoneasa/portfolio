@@ -307,6 +307,23 @@ document.addEventListener('DOMContentLoaded', () => {
       img2: "assets/artworks/thumbs/artwork_12_thumb.jpg",
       caption2: "Luxury Gala Backdrop",
       projectId: 7
+    },
+    {
+      category: "WorldSkills Manila 2025",
+      title: "WorldSkills Manila 2025",
+      client: "WorldSkills ASEAN Manila 2025 (Competition Test Package)",
+      year: "Year 2025 – 2026",
+      desc: "Official Graphic Design Technology competition test package execution: Module 1 Corporate Branding & A1 Poster, Module 2 Multi-page Editorial Layout, and Module 3 Structural 3D Packaging & POS Display.",
+      bullets: [
+        "Module 1: Corporate Vector Logo & Dynamic A1 Event Poster",
+        "Module 2: Multi-Page Editorial Spread & Baseline Grid Layout",
+        "Module 3: Structural Dieline Blueprints & 3D Packaging Box"
+      ],
+      img1: "assets/images/worldskills/thumbs/wsa_m1_poster_a1.jpg",
+      caption1: "WorldSkills A1 Poster",
+      img2: "assets/images/worldskills/thumbs/wsa_m3_box_mockup.jpg",
+      caption2: "3D Packaging Box",
+      projectId: 18
     }
   ];
 
@@ -600,6 +617,51 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeCompetitionIndex = 0;
 
   const competitionGalleryItems = [
+    {
+      img: './assets/images/worldskills/web/wsa_m1_poster_a1.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Module 1 A1 Event Poster',
+      desc: 'Official Graphic Design Technology competition test package: High-impact A1 promotional event poster featuring corporate typography, dynamic vector geometry, and calibrated Pantone-to-CMYK prepress output under strict timed trade standards.',
+      category: 'WORLDSKILLS ASEAN 2025',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025 (Test Package)',
+      tools: ['Adobe Illustrator', 'Adobe InDesign', 'Pantone CMYK Prepress']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m3_box_mockup.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Module 3 3D Packaging Box',
+      desc: 'Structural 3D folding carton box dieline engineering with gold foil accents, spot UV varnish separation plates, and photorealistic 3D presentation.',
+      category: 'WORLDSKILLS PACKAGING',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Structural Dielines', 'Adobe Photoshop 3D', 'Prepress Proofing']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m2_editorial_spread.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Module 2 Editorial Publication Spread',
+      desc: '12-column baseline grid publication spread engineered with typographical hierarchy, baseline locking, photo framing, and CMYK offset separation.',
+      category: 'WORLDSKILLS EDITORIAL',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Adobe InDesign', 'Typography Grid', 'CMYK Offset Export']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m1_logo_display.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Module 1 Corporate Vector Logo',
+      desc: 'Corporate vector identity mark with mathematical bezier curves, clear space safety rules, negative space balance, and monochrome variations.',
+      category: 'WORLDSKILLS BRANDING',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Adobe Illustrator', 'Vector Bezier Math', 'Identity Manual']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m3_pos_display.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Retail POS Counter Display',
+      desc: 'Point-of-sale (POS) retail counter merchandising unit designed for promotional retail presentation and modular packaging staging.',
+      category: 'WORLDSKILLS RETAIL POS',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Retail POS Engineering', 'Photoshop Staging', 'Prepress Cutlines']
+    },
     {
       img: './assets/images/competitions/web/robotic_img_7829.jpg',
       title: 'Robotics Competition — 2nd Place Honor',
