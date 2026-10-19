@@ -307,6 +307,23 @@ document.addEventListener('DOMContentLoaded', () => {
       img2: "assets/artworks/thumbs/artwork_12_thumb.jpg",
       caption2: "Luxury Gala Backdrop",
       projectId: 7
+    },
+    {
+      category: "WorldSkills 2025",
+      title: "WorldSkills Manila 2025",
+      client: "WorldSkills ASEAN Manila 2025 (Competition Test Package)",
+      year: "Year 2025 – 2026",
+      desc: "Graphic Design Technology international trade competition test package: Module 1 Corporate Brand & A1 Poster, Module 2 Editorial Layout, and Module 3 3D Packaging & POS Display.",
+      bullets: [
+        "A1 Corporate Event Poster & Vector Identity",
+        "Multi-Page Publication Spread & Catalogue",
+        "3D Packaging Dieline & Retail POS Display"
+      ],
+      img1: "assets/images/worldskills/thumbs/wsa_m1_poster_a1.jpg",
+      caption1: "Manila 2025 A1 Poster",
+      img2: "assets/images/worldskills/thumbs/wsa_m3_box_mockup.jpg",
+      caption2: "3D Packaging & POS",
+      projectId: 18
     }
   ];
 
@@ -600,6 +617,69 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeCompetitionIndex = 0;
 
   const competitionGalleryItems = [
+    {
+      img: './assets/images/worldskills/web/wsa_m1_poster_a1.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Corporate Brand & A1 Poster Campaign',
+      desc: 'Official Graphic Design Technology competition test package task: Corporate brand identity, vector logo mark, and dynamic A1 promotional poster created under strict timed trade competition standards.',
+      category: 'WORLDSKILLS ASEAN MANILA 2025',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN & TESDA Philippines',
+      tools: ['Adobe Illustrator', 'Adobe InDesign', 'Adobe Photoshop', 'Prepress CMYK']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m2_editorial_spread.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Multi-Page Editorial Spread',
+      desc: 'Module 2 Editorial Publication layout: Asymmetric 12-column grid, baseline grid typography locking, image framing, and CMYK offset prepress specifications.',
+      category: 'WORLDSKILLS EDITORIAL',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025 (Module 2)',
+      tools: ['Adobe InDesign', 'Baseline Grid Typography', 'CMYK Prepress']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m2_cover_mockup.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Publication Booklet Cover',
+      desc: 'Multi-page editorial publication booklet cover mockup and visual hierarchy engineered for commercial offset printing.',
+      category: 'WORLDSKILLS EDITORIAL',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['InDesign Cover Layout', 'Photorealistic Mockup', 'CMYK Bleed']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m3_box_mockup.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — 3D Structural Packaging Box',
+      desc: 'Module 3 Packaging: 3D folding carton structural prototype with gold foil stamping, spot UV varnish, and technical dieline drafting.',
+      category: 'WORLDSKILLS PACKAGING',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025 (Module 3)',
+      tools: ['Dieline Blueprints', '3D Box Rendering', 'Spot UV & Foil Mask']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m3_pos_display.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Retail POS Counter Display',
+      desc: 'Competition Point of Sale retail counter display unit engineered with custom header card and structural slots for product boxes.',
+      category: 'WORLDSKILLS POS DISPLAY',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Structural POS Display', 'Retail Merchandising', 'Dieline Blueprint']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m1_logo_display.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Vector Logo Identity System',
+      desc: 'Corporate vector identity guidelines, clear space boundaries, minimum sizing, and monochrome variants.',
+      category: 'WORLDSKILLS IDENTITY',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Vector Geometry', 'Brand Guidelines', 'Clear Space Specs']
+    },
+    {
+      img: './assets/images/worldskills/web/wsa_m3_applied_mockup.jpg',
+      title: 'WorldSkills ASEAN Manila 2025 — Applied Packaging Mockup',
+      desc: 'Photorealistic commercial staging of finished packaging with gold foil, spot varnish, and lighting calibration.',
+      category: 'WORLDSKILLS PACKAGING',
+      date: '2025 - 2026',
+      client: 'WorldSkills ASEAN Manila 2025',
+      tools: ['Photoshop 3D Staging', 'Lighting Calibration', 'Texture Shading']
+    },
     {
       img: './assets/images/competitions/web/robotic_img_7829.jpg',
       title: 'Robotics Competition — 2nd Place Honor',
