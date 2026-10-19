@@ -471,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.card-frame').forEach(card => {
     card.addEventListener('click', (e) => {
       e.stopPropagation();
-      const projectId = card.getAttribute('data-project') || card.getAttribute('data-id');
+      const projectId = card.getAttribute('data-project');
       const imgEl = card.querySelector('img');
       const captionEl = card.querySelector('.card-caption');
       const fullImg = card.getAttribute('data-full-img') || (imgEl ? imgEl.src : '');
@@ -480,9 +480,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const desc = card.getAttribute('data-desc') || '';
 
       let project = null;
-      const projectsList = (typeof portfolioProjects !== 'undefined') ? portfolioProjects : (window.portfolioProjects || null);
-      if (projectId && projectsList) {
-        project = projectsList.find(p => String(p.id) === String(projectId));
+      if (projectId && window.portfolioProjects) {
+        project = window.portfolioProjects.find(p => p.id === projectId);
       }
       openLightbox(project, fullImg, captionEl ? captionEl.textContent : '', cat, client, desc);
     });

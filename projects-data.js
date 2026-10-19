@@ -327,63 +327,6 @@ const portfolioProjects = [
     aspectRatio: "3:2",
     details: "Delivered responsive cover photo suites tailored for both mobile and desktop viewports, ensuring vital contact info and CTA buttons remain perfectly framed in the safe zones.",
     collaborator: "SOK SEREYVISAL"
-  },
-  {
-    id: 18,
-    title: "WorldSkills ASEAN Manila 2025 — Corporate Brand & A1 Poster Campaign",
-    category: "branding",
-    client: "WorldSkills ASEAN Manila 2025 (Competition Test Package)",
-    clientLogo: "WSA",
-    role: "Graphic Design Technology Competitor",
-    deliverables: ["A1 Promotional Poster", "Corporate Vector Logo System", "YouTube Motion Banner", "Social Feed Mockup"],
-    palette: ["#04098a", "#0284c7", "#38bdf8", "#f59e0b"],
-    tags: ["WorldSkills", "Brand Identity", "A1 Poster", "Typography", "Prepress"],
-    image: "assets/images/worldskills/web/wsa_m1_poster_a1.jpg",
-    thumb: "assets/images/worldskills/thumbs/wsa_m1_poster_a1.jpg",
-    summary: "Official Graphic Design Technology competition test package task: Designed full corporate identity system, dynamic A1 event poster, vector logo geometry, and multi-format digital campaign under timed competition standards.",
-    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
-    date: "2025 - 2026",
-    aspectRatio: "3:2",
-    details: "Executed to meet official WorldSkills ASEAN Manila 2025 technical marking criteria: precise vector curve bezier math, corporate clear space boundaries, Pantone-to-CMYK color conversion, and high-impact typographic hierarchy.",
-    collaborator: "PAUV SONEASA (WorldSkills Competitor)"
-  },
-  {
-    id: 19,
-    title: "WorldSkills ASEAN Manila 2025 — Multi-Page Editorial & Catalogue",
-    category: "print",
-    client: "WorldSkills ASEAN Manila 2025 (Module 2 Editorial)",
-    clientLogo: "WSA",
-    role: "Editorial Layout & Prepress Specialist",
-    deliverables: ["Multi-Page Booklet Cover", "2-Page Magazine Spread", "Digital Interactive Catalogue", "CMYK Prepress Bleed Sheet"],
-    palette: ["#0284c7", "#38bdf8", "#04098a", "#fafafa"],
-    tags: ["Editorial Layout", "Typography Grid", "Publication Design", "Prepress CMYK"],
-    image: "assets/images/worldskills/web/wsa_m2_editorial_spread.jpg",
-    thumb: "assets/images/worldskills/thumbs/wsa_m2_editorial_spread.jpg",
-    summary: "Competition publication layout engineered with asymmetric 12-column grid, baseline grid locking, high-resolution photography framing, and CMYK offset prepress specifications.",
-    tools: ["Adobe InDesign", "Adobe Illustrator", "Adobe Photoshop"],
-    date: "2025 - 2026",
-    aspectRatio: "3:2",
-    details: "Strict adherence to WorldSkills international publication standards: 0 hyphenation run-ons, baseline grid typography locking, 300 DPI effective resolution verification, and 3mm bleed margin export.",
-    collaborator: "PAUV SONEASA (WorldSkills Competitor)"
-  },
-  {
-    id: 20,
-    title: "WorldSkills ASEAN Manila 2025 — 3D Packaging, Prepress Dieline & POS Display",
-    category: "packaging",
-    client: "WorldSkills ASEAN Manila 2025 (Module 3 Packaging)",
-    clientLogo: "WSA",
-    role: "Structural Packaging & Prepress Designer",
-    deliverables: ["Structural Dieline Blueprints", "3D Folding Carton Mockup", "Point-of-Sale (POS) Counter Display", "Finishing Foil & Emboss Masks"],
-    palette: ["#04098a", "#0284c7", "#eab308", "#ffffff"],
-    tags: ["Packaging Design", "Dielines", "3D Mockup", "POS Display", "Prepress"],
-    image: "assets/images/worldskills/web/wsa_m3_box_mockup.jpg",
-    thumb: "assets/images/worldskills/thumbs/wsa_m3_box_mockup.jpg",
-    summary: "Complete structural packaging suite: vector dieline blueprints with folding tucks, realistic 3D box rendering with gold foil and spot UV accents, and matching POS retail counter display.",
-    tools: ["Adobe Illustrator (Dielines)", "Adobe Photoshop (3D Mockup)", "InDesign"],
-    date: "2025 - 2026",
-    aspectRatio: "3:2",
-    details: "Engineered from 2D flat dieline schematics to photorealistic 3D rendered mockups. Features spot UV varnish separation layers, metallic foil embossing plates, and modular retail counter display presentation.",
-    collaborator: "PAUV SONEASA (WorldSkills Competitor)"
   }
 ];
 
@@ -406,14 +349,14 @@ const profileData = {
     ]
   },
   stats: [
-    { number: "20+", label: "Design Suites", sub: "Commercial & WorldSkills" },
-    { number: "110+", label: "Finished Artworks", sub: "Vectors, Posters & Identity" },
+    { number: "17+", label: "Design Suites", sub: "Commercial & Cultural" },
+    { number: "100+", label: "Finished Artworks", sub: "Vectors, Posters & Identity" },
     { number: "4+", label: "Industry Roles", sub: "Instructional & Corporate" },
-    { number: "3x", label: "Competition Honors", sub: "WorldSkills, Robotics & Sales" }
+    { number: "2x", label: "Competition Honors", sub: "Robotics & Best Seller" }
   ],
   collaboration: {
     teammate: "SOK SEREYVISAL",
-    note: "Commercial portfolio collections reflect creative teamwork alongside partner SOK SEREYVISAL. WorldSkills competition modules executed individually under international trade standards."
+    note: "All portfolio collections showcased reflect creative teamwork and collaborative design direction alongside creative partner SOK SEREYVISAL."
   },
   skills: {
     creative: [
@@ -508,13 +451,6 @@ const profileData = {
     }
   ],
   achievements: [
-    {
-      title: "WorldSkills ASEAN Manila 2025 — Competition Test Package Competitor",
-      year: "2025 – 2026",
-      icon: "award",
-      badge: "Graphic Design Technology",
-      description: "Trained under WorldSkills international technical standards: Module 1 Corporate Branding & A1 Poster, Module 2 Editorial Layout, Module 3 Structural Packaging & POS Display under timed trade competition specifications."
-    },
     {
       title: "Second Place — Robotics Competition",
       year: "2023 – 2024",
