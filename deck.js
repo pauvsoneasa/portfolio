@@ -29,9 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const autoplayBtn = document.getElementById('autoplayBtn');
   const playLabel = document.getElementById('playLabel');
   const playIcon = document.getElementById('playIcon');
+  const musicBtn = document.getElementById('musicBtn');
+  const musicLabel = document.getElementById('musicLabel');
   const soundBtn = document.getElementById('soundBtn');
   const fullscreenBtn = document.getElementById('fullscreenBtn');
   const deckToast = document.getElementById('deckToast');
+  const bgAudio = document.getElementById('deckBgAudio');
 
   // Lightbox DOM Elements
   const lightbox = document.getElementById('deckLightbox');
@@ -80,6 +83,84 @@ document.addEventListener('DOMContentLoaded', () => {
     toastTimer = setTimeout(() => {
       deckToast.classList.remove('show');
     }, duration);
+  }
+
+  // ---- Relaxing Background Audio Engine (Soft, looping, non-intrusive 18% volume) ----
+  const TARGET_VOLUME = 0.18; // Relaxing gentle background volume
+  let musicDesiredState = localStorage.getItem('deck_bg_music') !== 'false'; // default to true
+
+  function updateMusicUI(active) {
+    if (musicBtn) {
+      musicBtn.classList.toggle('active', active);
+    }
+    if (musicLabel) {
+      musicLabel.textContent = active ? 'MUSIC ON' : 'MUSIC OFF';
+    }
+  }
+
+  function playBgMusic() {
+    if (!bgAudio || !musicDesiredState) return;
+    bgAudio.volume = TARGET_VOLUME;
+    bgAudio.loop = true;
+    const p = bgAudio.play();
+    if (p !== undefined) {
+      p.then(() => {
+        updateMusicUI(true);
+      }).catch(() => {
+        // Browser autoplay policy requires user gesture
+        updateMusicUI(false);
+        listenForFirstInteraction();
+      });
+    }
+  }
+
+  function pauseBgMusic() {
+    if (!bgAudio) return;
+    bgAudio.pause();
+    updateMusicUI(false);
+  }
+
+  function toggleBgMusic() {
+    musicDesiredState = !musicDesiredState;
+    localStorage.setItem('deck_bg_music', musicDesiredState);
+    if (musicDesiredState) {
+      playBgMusic();
+      showToast('Background Music: Playing softly 🎵');
+    } else {
+      pauseBgMusic();
+      showToast('Background Music: Muted');
+    }
+  }
+
+  let interactionUnlocked = false;
+  function listenForFirstInteraction() {
+    if (interactionUnlocked) return;
+    const unlockEvents = ['pointerdown', 'keydown', 'touchstart', 'wheel', 'scroll'];
+    function onFirstUserGesture() {
+      interactionUnlocked = true;
+      unlockEvents.forEach(evt => window.removeEventListener(evt, onFirstUserGesture));
+      if (musicDesiredState && bgAudio && bgAudio.paused) {
+        playBgMusic();
+      }
+    }
+    unlockEvents.forEach(evt => window.addEventListener(evt, onFirstUserGesture, { once: true, passive: true }));
+  }
+
+  if (bgAudio) {
+    bgAudio.volume = TARGET_VOLUME;
+    bgAudio.loop = true;
+    if (musicDesiredState) {
+      playBgMusic();
+    } else {
+      updateMusicUI(false);
+    }
+  }
+
+  if (musicBtn) {
+    musicBtn.addEventListener('click', () => {
+      playBeep(720, 'sine', 0.08);
+      toggleBgMusic();
+    });
   }
 
   // Update SFX button
@@ -340,6 +421,10 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
       case 'm':
       case 'M':
+        toggleBgMusic();
+        break;
+      case 's':
+      case 'S':
         if (soundBtn) soundBtn.click();
         break;
     }

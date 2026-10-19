@@ -47,6 +47,21 @@
         <span id="playLabel">PAUSE</span>
       </button>
 
+      <!-- Relaxing Background Music Pill -->
+      <button class="deck-control-pill active" id="musicBtn" title="Toggle relaxing background song (M key)" aria-label="Toggle background music">
+        <svg id="musicIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+        <span id="musicLabel">MUSIC ON</span>
+        <span class="music-equalizer" aria-hidden="true">
+          <span class="music-bar"></span>
+          <span class="music-bar"></span>
+          <span class="music-bar"></span>
+        </span>
+      </button>
+
       <!-- Sound Toggle Button -->
       <button class="deck-control-pill" id="soundBtn" title="Toggle audio SFX">
         <svg id="soundIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
@@ -62,6 +77,9 @@
       <div class="deck-control-pill deck-pill-counter" id="slideIndicator">SLIDE 01 / 15</div>
     </div>
   </header>
+
+  <!-- Relaxing Background Song Audio Element (Soft Cambodian Classic) -->
+  <audio id="deckBgAudio" src="./assets/audio/background-song.mp3" preload="auto" loop></audio>
 
   <!-- Side Slide Navigator Dots -->
   <nav class="deck-dots-nav" id="deckDotsNav" aria-label="Slide Navigation">
