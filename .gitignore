@@ -1,0 +1,13 @@
+# Temporary & Backup Files
+*.bak
+*.tmp
+*.pyc
+__pycache__/
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Nested repos & scratch
+portfolio/

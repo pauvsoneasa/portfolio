@@ -1,0 +1,799 @@
+/* ===================================================================
+   PAUV SONEASA &mdash; PORTFOLIO ENGINE v4
+   Exact 1:1 Match of Rin Layheang's Showcase Template (@heangbeksloy)
+   =================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ---- 1. Parametric Harmonic Sinusoidal Contours Generator (Rin Layheang Style) ----
+  function initHeroContours() {
+    const svg = document.getElementById('heroContours');
+    if (!svg) return;
+
+    // Harmonic wave centers
+    const centers = [
+      [260, 250, 1.0],
+      [1180, 190, 0.85],
+      [900, 760, 1.15]
+    ];
+
+    let svgPaths = '';
+    centers.forEach(([cx, cy, scale], i) => {
+      for (let a = 1; a <= 7; a++) {
+        const rBase = a * 46 * scale;
+        let d = '';
+        for (let t = 0; t <= 64; t++) {
+          const angle = (t / 64) * Math.PI * 2;
+          const r = rBase * (1 + 0.16 * Math.sin(angle * 3 + i * 2 + a * 0.35) + 0.08 * Math.cos(angle * 5 - i));
+          const x = (cx + Math.cos(angle) * r * 1.25).toFixed(1);
+          const y = (cy + Math.sin(angle) * r).toFixed(1);
+          d += `${t ? 'L' : 'M'}${x} ${y}`;
+        }
+        svgPaths += `<path d="${d}Z" />`;
+      }
+    });
+
+    svg.innerHTML = svgPaths;
+  }
+  initHeroContours();
+
+  // ---- 2. Dual-Layer Hero Portrait Toggle (3D Chrome Sculpture & Real Photo) ----
+  const heroSwitchBtn = document.getElementById('heroSwitchBtn');
+  const heroPortrait = document.getElementById('heroPortrait');
+  const heroSwitchLabel = document.getElementById('heroSwitchLabel');
+  const activeLayerTag = document.getElementById('activeLayerTag');
+
+  if (heroSwitchBtn && heroPortrait) {
+    heroSwitchBtn.addEventListener('click', () => {
+      const current = heroPortrait.getAttribute('data-layer') || 'photo';
+      const next = current === 'photo' ? 'alt' : 'photo';
+      heroPortrait.setAttribute('data-layer', next);
+      
+      if (next === 'alt') {
+        heroSwitchLabel.textContent = 'SWITCH TO REAL PHOTO';
+        if (activeLayerTag) activeLayerTag.textContent = '3D CHROME SCULPTURE';
+        playUiSound(840, 'triangle', 0.12);
+        showToast('Viewing 3D Futuristic Chrome Avatar');
+      } else {
+        heroSwitchLabel.textContent = 'SWITCH TO 3D CHROME';
+        if (activeLayerTag) activeLayerTag.textContent = 'PORTRAIT PHOTO';
+        playUiSound(640, 'triangle', 0.1);
+        showToast('Viewing Real Portrait Photo');
+      }
+    });
+  }
+
+  // ---- 3. Custom Magnetic Cursor ----
+  const cursorDot  = document.getElementById('cursorDot');
+  const cursorRing = document.getElementById('cursorRing');
+  if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
+    let rx = 0, ry = 0;
+    window.addEventListener('mousemove', e => {
+      cursorDot.style.left  = e.clientX + 'px';
+      cursorDot.style.top   = e.clientY + 'px';
+      rx += (e.clientX - rx) * 0.18;
+      ry += (e.clientY - ry) * 0.18;
+    });
+
+    function animateCursor() {
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top  = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll('a, button, .project-card, [role=button], .filter-btn').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovered'));
+    });
+  }
+
+  // Global UI State
+  let currentCategory = 'all';
+  let searchQuery = '';
+  let activeLightboxIndex = 0;
+  let isZoomed = false;
+  let soundEnabled = true;
+
+  // Web Audio API Synthesizer
+  let audioCtx = null;
+  function playUiSound(freq = 600, type = 'sine', duration = 0.08) {
+    if (!soundEnabled) return;
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      // Audio autoplay restrictions
+    }
+  }
+
+  // Sound Toggle
+  const soundToggleBtn = document.getElementById('soundToggleBtn');
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        playUiSound(800, 'triangle', 0.1);
+        showToast('UI Audio Feedback Enabled');
+        soundToggleBtn.style.opacity = '1';
+      } else {
+        showToast('UI Audio Feedback Muted');
+        soundToggleBtn.style.opacity = '0.5';
+      }
+    });
+  }
+
+  // Live Phnom Penh Clock (UTC+7)
+  const liveTimeTicker = document.getElementById('liveTimeTicker');
+  function updateLiveClock() {
+    if (!liveTimeTicker) return;
+    const now = new Date();
+    const options = {
+      timeZone: 'Asia/Phnom_Penh',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    };
+    try {
+      liveTimeTicker.textContent = new Intl.DateTimeFormat('en-GB', options).format(now);
+    } catch (e) {
+      liveTimeTicker.textContent = now.toTimeString().split(' ')[0];
+    }
+  }
+  updateLiveClock();
+  setInterval(updateLiveClock, 1000);
+
+  // ---- 4. Floating Pill Navbar Interactions ----
+  const navbar = document.getElementById('navbar');
+  const mobileNavToggle = document.getElementById('mobileNavToggle');
+  const navCenterMenu = document.querySelector('.nav-center-menu');
+  const backToTopBtn = document.getElementById('backToTopBtn');
+
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > 60) {
+      navbar.classList.add('is-scrolled');
+      backToTopBtn.classList.add('visible');
+
+      if (currentScrollY > lastScrollY + 10 && currentScrollY > 240) {
+        navbar.classList.add('is-hidden');
+      } else if (currentScrollY < lastScrollY - 6) {
+        navbar.classList.remove('is-hidden');
+      }
+    } else {
+      navbar.classList.remove('is-scrolled', 'is-hidden');
+      backToTopBtn.classList.remove('visible');
+    }
+
+    lastScrollY = currentScrollY;
+    updateActiveNavLink();
+  }, { passive: true });
+
+  if (mobileNavToggle && navCenterMenu) {
+    mobileNavToggle.addEventListener('click', () => {
+      playUiSound(540, 'triangle', 0.08);
+      navCenterMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        playUiSound(600, 'sine', 0.05);
+        navCenterMenu.classList.remove('open');
+      });
+    });
+  }
+
+  function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section, header');
+    let currentId = 'top';
+    sections.forEach(section => {
+      const top = section.offsetTop - 140;
+      const height = section.offsetHeight;
+      if (window.scrollY >= top && window.scrollY < top + height) {
+        currentId = section.getAttribute('id') || 'top';
+      }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentId}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  backToTopBtn.addEventListener('click', () => {
+    playUiSound(880, 'sine', 0.12);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ---- 5. Theme Switcher (Defaulting to Editorial Light Paper as seen in Video) ----
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeIconDark = document.getElementById('themeIconDark');
+  const themeIconLight = document.getElementById('themeIconLight');
+
+  // Default to light (Rin Layheang signature) unless explicitly saved
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  applyTheme(savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      playUiSound(720, 'sine', 0.1);
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(newTheme);
+      showToast(`Switched to ${newTheme === 'dark' ? 'Obsidian' : 'Editorial Light'} theme`);
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (theme === 'light') {
+      themeIconDark.style.display = 'block';
+      themeIconLight.style.display = 'none';
+    } else {
+      themeIconDark.style.display = 'none';
+      themeIconLight.style.display = 'block';
+    }
+  }
+
+  // ---- 6. Interactive Editorial Slide Deck Engine (Ryan Saputra Style) ----
+  const editorialSlides = [
+    {
+      category: "Design Feed & Story",
+      title: "Design Feed & Story",
+      client: "Borann Center, BG Cream & Socheat Skin Care",
+      year: "Tahun 2023 – 2024",
+      desc: "Multi-channel high-engagement promotional carousels, feed banners, and story sets engineered with high-impact product cutouts, typography hierarchy, and cosmetic color staging.",
+      bullets: [
+        "Instagram & Facebook Feed Posters",
+        "Story Retouching & Carousel Staging",
+        "Commercial Cosmetic Packaging Layouts"
+      ],
+      img1: "assets/artworks/thumbs/artwork_03_thumb.jpg",
+      caption1: "Feed Poster",
+      img2: "assets/artworks/thumbs/artwork_05_thumb.jpg",
+      caption2: "Story Layout",
+      projectId: 1
+    },
+    {
+      category: "Design Logo & Brand",
+      title: "Design Logo & Brand",
+      client: "CSL Travel, BRT Home Solutions & Corporate Identity",
+      year: "Tahun 2023 – 2024",
+      desc: "Minimalist vector identity systems, executive business cards with foil accents, legal digital company stamps, and complete corporate stationery standards.",
+      bullets: [
+        "Vector Master Logomarks & Rubber Stamps",
+        "Executive Business Cards & RFID Badges",
+        "Corporate Stationery Brand Guidelines"
+      ],
+      img1: "assets/artworks/thumbs/artwork_18_thumb.jpg",
+      caption1: "Vector Logotype",
+      img2: "assets/artworks/thumbs/artwork_17_thumb.jpg",
+      caption2: "Executive Identity",
+      projectId: 16
+    },
+    {
+      category: "Design Brosur & Print",
+      title: "Design Brosur & Print",
+      client: "CSL Travel & Tours & BRT Home Solutions",
+      year: "Tahun 2023 – 2024",
+      desc: "Prepress-ready print collateral, multi-fold corporate brochures, service rate sheets, and international flight tour itinerary decks with CMYK offset specifications.",
+      bullets: [
+        "Tri-fold Corporate & Tourism Brochures",
+        "Multi-Page Flight & Tour Itineraries",
+        "Prepress CMYK Print Separation"
+      ],
+      img1: "assets/artworks/thumbs/artwork_04_thumb.jpg",
+      caption1: "Tri-fold Leaflet",
+      img2: "assets/artworks/thumbs/artwork_08_thumb.jpg",
+      caption2: "Corporate Brochure",
+      projectId: 2
+    },
+    {
+      category: "Photo & Packaging",
+      title: "Photo & Packaging",
+      client: "Kroung Meung Spices & Tbal Khmer Culinary",
+      year: "Tahun 2023 – 2024",
+      desc: "Mouth-watering culinary photo styling, retail supermarket shelf packaging headers, authentic spice paste labels, and high-frequency cosmetic skin retouching.",
+      bullets: [
+        "FMCG Supermarket Packaging & Shelf Headers",
+        "Culinary Lighting & Food Retouching",
+        "Product Cutouts & High-Frequency Staging"
+      ],
+      img1: "assets/artworks/thumbs/artwork_13_thumb.jpg",
+      caption1: "Supermarket Packaging",
+      img2: "assets/artworks/thumbs/artwork_06_thumb.jpg",
+      caption2: "Culinary Photo Styling",
+      projectId: 11
+    },
+    {
+      category: "Art & Vector",
+      title: "Art & Vector",
+      client: "National Heritage Series & Sabara Angkor Luxury",
+      year: "Tahun 2023 – 2024",
+      desc: "Regal Cambodian cultural tributes, classical golden filigree ornaments, royal crest vector modernization, and large-format architectural event backdrops.",
+      bullets: [
+        "Khmer Royal Crests & Traditional Filigree",
+        "Visak Bochea & Civic Festival Artworks",
+        "Large-Format Stage Backdrops & X-Stands"
+      ],
+      img1: "assets/artworks/thumbs/artwork_09_thumb.jpg",
+      caption1: "Khmer Heritage Art",
+      img2: "assets/artworks/thumbs/artwork_12_thumb.jpg",
+      caption2: "Luxury Gala Backdrop",
+      projectId: 7
+    }
+  ];
+
+  let currentDeckIndex = 0;
+  const deckCounter = document.getElementById('deckCounter');
+  const deckPills = document.querySelectorAll('.deck-pill');
+  const deckTitle = document.getElementById('deckTitle');
+  const deckYear = document.getElementById('deckYear');
+  const deckClient = document.getElementById('deckClient');
+  const deckDesc = document.getElementById('deckDesc');
+  const deckBullets = document.getElementById('deckBullets');
+  const deckImg1 = document.getElementById('deckImg1');
+  const deckImg2 = document.getElementById('deckImg2');
+  const deckCaption1 = document.getElementById('deckCaption1');
+  const deckCaption2 = document.getElementById('deckCaption2');
+  const deckPrevBtn = document.getElementById('deckPrevBtn');
+  const deckNextBtn = document.getElementById('deckNextBtn');
+  const deckInspectCurrentBtn = document.getElementById('deckInspectCurrentBtn');
+
+  function renderDeckSlide(index) {
+    if (!deckTitle) return;
+    currentDeckIndex = (index + editorialSlides.length) % editorialSlides.length;
+    const slide = editorialSlides[currentDeckIndex];
+
+    // Update Counter
+    if (deckCounter) {
+      deckCounter.textContent = `SLIDE 0${currentDeckIndex + 1} / 0${editorialSlides.length}`;
+    }
+
+    // Update Pills
+    deckPills.forEach((pill, idx) => {
+      pill.classList.toggle('active', idx === currentDeckIndex);
+    });
+
+    // Animate content smoothly
+    const infoPanel = document.querySelector('.deck-info-panel');
+    const mediaPanel = document.getElementById('deckMediaPanel');
+    if (infoPanel) {
+      infoPanel.style.opacity = '0.3';
+      infoPanel.style.transform = 'translateY(6px)';
+      infoPanel.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+    }
+    if (mediaPanel) {
+      mediaPanel.style.opacity = '0.6';
+      mediaPanel.style.transition = 'opacity 0.22s ease';
+    }
+
+    setTimeout(() => {
+      if (deckTitle) deckTitle.textContent = slide.title;
+      if (deckYear) deckYear.textContent = slide.year;
+      if (deckClient) deckClient.textContent = slide.client;
+      if (deckDesc) deckDesc.textContent = slide.desc;
+      
+      if (deckBullets) {
+        deckBullets.innerHTML = slide.bullets.map(b => `<li>${b}</li>`).join('');
+      }
+
+      if (deckImg1) {
+        deckImg1.src = slide.img1;
+        deckImg1.alt = slide.caption1;
+      }
+      if (deckCaption1) deckCaption1.textContent = slide.caption1;
+
+      if (deckImg2) {
+        deckImg2.src = slide.img2;
+        deckImg2.alt = slide.caption2;
+      }
+      if (deckCaption2) deckCaption2.textContent = slide.caption2;
+
+      if (infoPanel) {
+        infoPanel.style.opacity = '1';
+        infoPanel.style.transform = 'translateY(0)';
+      }
+      if (mediaPanel) {
+        mediaPanel.style.opacity = '1';
+      }
+    }, 140);
+  }
+
+  // Pill clicks
+  deckPills.forEach((pill, idx) => {
+    pill.addEventListener('click', () => {
+      playUiSound(620, 'triangle', 0.08);
+      renderDeckSlide(idx);
+    });
+  });
+
+  // Prev / Next arrow buttons
+  if (deckPrevBtn) {
+    deckPrevBtn.addEventListener('click', () => {
+      playUiSound(540, 'triangle', 0.08);
+      renderDeckSlide(currentDeckIndex - 1);
+    });
+  }
+
+  if (deckNextBtn) {
+    deckNextBtn.addEventListener('click', () => {
+      playUiSound(680, 'triangle', 0.08);
+      renderDeckSlide(currentDeckIndex + 1);
+    });
+  }
+
+  // Inspect button opens Lightbox modal for this project
+  if (deckInspectCurrentBtn) {
+    deckInspectCurrentBtn.addEventListener('click', () => {
+      playUiSound(720, 'sine', 0.1);
+      const slide = editorialSlides[currentDeckIndex];
+      const targetIndex = portfolioProjects.findIndex(p => p.id === slide.projectId);
+      if (targetIndex !== -1) {
+        openLightbox(targetIndex);
+      }
+    });
+  }
+
+  // Framed Polaroid cards click opens Lightbox modal
+  document.querySelectorAll('.framed-art-card').forEach(card => {
+    card.addEventListener('click', () => {
+      playUiSound(750, 'sine', 0.1);
+      const slide = editorialSlides[currentDeckIndex];
+      const targetIndex = portfolioProjects.findIndex(p => p.id === slide.projectId);
+      if (targetIndex !== -1) {
+        openLightbox(targetIndex);
+      }
+    });
+  });
+
+  // ---- 7. Render Filterable 2-Column Projects Grid ----
+  const portfolioGrid = document.getElementById('portfolioGrid');
+  const emptyGalleryState = document.getElementById('emptyGalleryState');
+  const filterPillsRow = document.getElementById('filterPillsRow');
+  const projectSearchInput = document.getElementById('projectSearchInput');
+  const searchClearBtn = document.getElementById('searchClearBtn');
+
+  function renderPortfolio() {
+    if (!portfolioGrid) return;
+    portfolioGrid.innerHTML = '';
+
+    const filtered = portfolioProjects.filter(project => {
+      const matchesCategory = (currentCategory === 'all' || project.category === currentCategory);
+      const q = searchQuery.toLowerCase().trim();
+      if (!q) return matchesCategory;
+
+      const matchesSearch = 
+        project.title.toLowerCase().includes(q) ||
+        project.client.toLowerCase().includes(q) ||
+        project.summary.toLowerCase().includes(q) ||
+        project.tools.some(t => t.toLowerCase().includes(q)) ||
+        project.tags.some(tag => tag.toLowerCase().includes(q));
+
+      return matchesCategory && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+      if (emptyGalleryState) emptyGalleryState.classList.add('visible');
+    } else {
+      if (emptyGalleryState) emptyGalleryState.classList.remove('visible');
+    }
+
+    filtered.forEach((project, idx) => {
+      const card = document.createElement('article');
+      card.className = 'project-card';
+      card.setAttribute('data-id', project.id);
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `View ${project.title}`);
+
+      // Swatches HTML
+      const swatchesHtml = (project.palette || ['#04098a', '#38bdf8', '#ffffff', '#0f172a'])
+        .map(color => `<span class="palette-swatch" data-hex="${color}" style="background-color: ${color};" title="Click to copy ${color}"></span>`)
+        .join('');
+
+      card.innerHTML = `
+        <div class="card-media-wrapper">
+          <img src="${project.thumb}" alt="${project.title}" loading="lazy">
+          <div class="card-overlay-hover">
+            <span class="inspect-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              <span>INSPECT ASSETS</span>
+            </span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-top-meta">
+            <div class="card-client-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>${project.client}</span>
+            </div>
+            <div class="card-palette-strip" title="Brand Color Palette">
+              ${swatchesHtml}
+            </div>
+          </div>
+          <h3 class="card-project-title">${project.title}</h3>
+          <p class="card-project-desc">${project.summary}</p>
+          <div class="card-bottom-actions">
+            <div class="card-tags-list">
+              ${project.tags.slice(0, 2).map(tag => `<span class="tag-badge">${tag}</span>`).join('')}
+            </div>
+            <span class="card-action-btn">
+              <span>DETAILS</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </span>
+          </div>
+        </div>
+      `;
+
+      // Swatch click to copy hex
+      card.querySelectorAll('.palette-swatch').forEach(swatch => {
+        swatch.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const hex = swatch.getAttribute('data-hex');
+          navigator.clipboard.writeText(hex).then(() => {
+            playUiSound(920, 'sine', 0.08);
+            showToast(`Copied color swatch ${hex}`);
+          });
+        });
+      });
+
+      // Card click opens Lightbox
+      card.addEventListener('click', () => {
+        playUiSound(480, 'sine', 0.1);
+        const originalIndex = portfolioProjects.findIndex(p => p.id === project.id);
+        openLightbox(originalIndex);
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const originalIndex = portfolioProjects.findIndex(p => p.id === project.id);
+          openLightbox(originalIndex);
+        }
+      });
+
+      portfolioGrid.appendChild(card);
+    });
+  }
+
+  // Category Filtering
+  if (filterPillsRow) {
+    filterPillsRow.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        playUiSound(650, 'sine', 0.06);
+        filterPillsRow.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.getAttribute('data-category');
+        renderPortfolio();
+      });
+    });
+  }
+
+  // Search Input
+  if (projectSearchInput) {
+    projectSearchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      if (searchClearBtn) {
+        searchClearBtn.classList.toggle('visible', searchQuery.length > 0);
+      }
+      renderPortfolio();
+    });
+
+    if (searchClearBtn) {
+      searchClearBtn.addEventListener('click', () => {
+        projectSearchInput.value = '';
+        searchQuery = '';
+        searchClearBtn.classList.remove('visible');
+        renderPortfolio();
+        projectSearchInput.focus();
+      });
+    }
+  }
+
+  renderPortfolio();
+
+  // ---- 7. Lightbox Modal Engine ----
+  const lightboxModal = document.getElementById('lightboxModal');
+  const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+  const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
+  const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+  const lightboxZoomBtn = document.getElementById('lightboxZoomBtn');
+  const lightboxActiveImg = document.getElementById('lightboxActiveImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const lightboxProjectTitle = document.getElementById('lightboxProjectTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+  const lightboxClient = document.getElementById('lightboxClient');
+  const lightboxRole = document.getElementById('lightboxRole');
+  const lightboxCategory = document.getElementById('lightboxCategory');
+  const lightboxDate = document.getElementById('lightboxDate');
+  const lightboxPalette = document.getElementById('lightboxPalette');
+  const lightboxTools = document.getElementById('lightboxTools');
+
+  function openLightbox(index) {
+    if (!lightboxModal) return;
+    activeLightboxIndex = (index + portfolioProjects.length) % portfolioProjects.length;
+    const project = portfolioProjects[activeLightboxIndex];
+
+    lightboxActiveImg.src = project.image;
+    lightboxActiveImg.alt = project.title;
+    lightboxCounter.textContent = `${String(activeLightboxIndex + 1).padStart(2, '0')} / ${String(portfolioProjects.length).padStart(2, '0')}`;
+    lightboxProjectTitle.textContent = project.title;
+    lightboxDesc.textContent = project.details || project.summary;
+    lightboxClient.textContent = project.client;
+    lightboxRole.textContent = project.role;
+    lightboxCategory.textContent = project.category.toUpperCase();
+    lightboxDate.textContent = project.date;
+
+    // Palette
+    lightboxPalette.innerHTML = (project.palette || ['#04098a', '#38bdf8', '#ffffff'])
+      .map(c => `<span class="palette-swatch" data-hex="${c}" style="background-color:${c}; width:20px; height:20px;" title="${c}"></span>`)
+      .join('');
+
+    lightboxPalette.querySelectorAll('.palette-swatch').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        const hex = swatch.getAttribute('data-hex');
+        navigator.clipboard.writeText(hex).then(() => {
+          playUiSound(920, 'sine', 0.08);
+          showToast(`Copied palette swatch ${hex}`);
+        });
+      });
+    });
+
+    // Tools
+    lightboxTools.innerHTML = (project.tools || ['Photoshop', 'Illustrator'])
+      .map(t => `<span>${t}</span>`)
+      .join('');
+
+    isZoomed = false;
+    lightboxActiveImg.classList.remove('zoomed');
+
+    lightboxModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  window.openProjectLightboxById = function(id) {
+    const idx = portfolioProjects.findIndex(p => p.id === id);
+    if (idx !== -1) {
+      playUiSound(520, 'sine', 0.1);
+      openLightbox(idx);
+    }
+  };
+
+  function closeLightbox() {
+    if (!lightboxModal) return;
+    playUiSound(420, 'sine', 0.08);
+    lightboxModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
+  if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', () => {
+    playUiSound(580, 'sine', 0.05);
+    openLightbox(activeLightboxIndex - 1);
+  });
+  if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', () => {
+    playUiSound(580, 'sine', 0.05);
+    openLightbox(activeLightboxIndex + 1);
+  });
+
+  if (lightboxZoomBtn && lightboxActiveImg) {
+    lightboxZoomBtn.addEventListener('click', () => {
+      isZoomed = !isZoomed;
+      lightboxActiveImg.classList.toggle('zoomed', isZoomed);
+      playUiSound(isZoomed ? 700 : 500, 'sine', 0.08);
+    });
+  }
+
+  // Keyboard navigation
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') openLightbox(activeLightboxIndex - 1);
+    if (e.key === 'ArrowRight') openLightbox(activeLightboxIndex + 1);
+    if (e.key === 'z' || e.key === 'Z') {
+      isZoomed = !isZoomed;
+      lightboxActiveImg.classList.toggle('zoomed', isZoomed);
+    }
+  });
+
+  // ---- 8. Interactive Stats Number Counter ----
+  const statNumbers = document.querySelectorAll('[data-count]');
+  const statObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const targetVal = parseInt(el.getAttribute('data-count'), 10);
+        let startVal = 0;
+        const duration = 1200;
+        const stepTime = 30;
+        const increment = Math.ceil(targetVal / (duration / stepTime));
+
+        const timer = setInterval(() => {
+          startVal += increment;
+          if (startVal >= targetVal) {
+            startVal = targetVal;
+            clearInterval(timer);
+          }
+          if (el.textContent.includes('+')) {
+            el.textContent = `${startVal}+`;
+          } else if (el.textContent.includes('x')) {
+            el.textContent = `${startVal}x`;
+          } else {
+            el.textContent = startVal;
+          }
+        }, stepTime);
+
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(s => statObserver.observe(s));
+
+  // ---- 9. Copy-to-Clipboard Buttons ----
+  const toastNotice = document.getElementById('toastNotice');
+  const toastMessage = document.getElementById('toastMessage');
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const textToCopy = btn.getAttribute('data-copy');
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        playUiSound(880, 'sine', 0.09);
+        showToast(`Copied "${textToCopy}" to clipboard!`);
+      }).catch(() => {
+        showToast('Unable to copy.');
+      });
+    });
+  });
+
+  function showToast(msg) {
+    if (!toastNotice || !toastMessage) return;
+    toastMessage.textContent = msg;
+    toastNotice.classList.add('show');
+    setTimeout(() => {
+      toastNotice.classList.remove('show');
+    }, 3000);
+  }
+
+  // ---- 10. Contact Form Submission Launcher ----
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      playUiSound(720, 'sine', 0.15);
+      const name = document.getElementById('formName').value;
+      const email = document.getElementById('formEmail').value;
+      const subject = document.getElementById('formSubject').value;
+      const message = document.getElementById('formMessage').value;
+
+      const mailtoUrl = `mailto:neasa232006@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+      showToast('Opening email client...');
+      setTimeout(() => {
+        window.location.href = mailtoUrl;
+      }, 500);
+    });
+  }
+
+});

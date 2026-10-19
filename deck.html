@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pauv Soneasa &mdash; Portfolio Slide Deck 2026</title>
+  <meta name="description" content="Editorial Graphic Design & Multimedia Presentation Deck for Pauv Soneasa, Year 3 IT CMD at BELTEI International University.">
+  <link rel="icon" type="image/png" href="./assets/profile/pauv_soneasa.png">
+
+  <!-- Google Fonts: Anton, Bebas Neue, Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700;1,900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./deck.css">
+</head>
+<body>
+
+  <!-- Hidden SVG Gradients for 4-Point Star Sparks -->
+  <svg width="0" height="0" style="position: absolute;">
+    <defs>
+      <linearGradient id="starGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+        <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.5" />
+        <stop offset="100%" stop-color="#04098a" stop-opacity="0.2" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Slim Top Autoplay Progress Bar -->
+  <div class="deck-top-progress-bar" id="topProgressBar"></div>
+
+  <!-- Floating Minimal Top Navigation Bar -->
+  <header class="deck-top-switcher">
+    <a href="./index.html" class="deck-switcher-btn" title="Return to primary hybrid portfolio">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      <span>FULL WEBSITE</span>
+    </a>
+
+    <div class="deck-controls-cluster">
+      <!-- Autoplay Deck Button (Active by default per Ryan's video replica) -->
+      <button class="deck-control-pill active" id="autoplayBtn" title="Autoplay slide deck (TikTok style)">
+        <svg id="playIcon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="4" width="3.5" height="16" fill="currentColor"/>
+          <rect x="14.5" y="4" width="3.5" height="16" fill="currentColor"/>
+        </svg>
+        <span id="playLabel">PAUSE</span>
+      </button>
+
+      <!-- Sound Toggle Button -->
+      <button class="deck-control-pill" id="soundBtn" title="Toggle audio SFX">
+        <svg id="soundIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        <span>SFX</span>
+      </button>
+
+      <!-- Fullscreen Button -->
+      <button class="deck-control-pill" id="fullscreenBtn" title="Toggle Fullscreen presentation">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      </button>
+
+      <!-- Live Counter Pill -->
+      <div class="deck-control-pill deck-pill-counter" id="slideIndicator">SLIDE 01 / 15</div>
+    </div>
+  </header>
+
+  <!-- Side Slide Navigator Dots -->
+  <nav class="deck-dots-nav" id="deckDotsNav" aria-label="Slide Navigation">
+    <button class="dot-btn active" data-target="slide-1" title="01 Cover"><span class="dot-label">01 Cover</span></button>
+    <button class="dot-btn" data-target="slide-2" title="02 About Me"><span class="dot-label">02 About Me</span></button>
+    <button class="dot-btn" data-target="slide-3" title="03 Campaigns"><span class="dot-label">03 Campaigns</span></button>
+    <button class="dot-btn" data-target="slide-4" title="04 Photo Produk"><span class="dot-label">04 Photo Produk</span></button>
+    <button class="dot-btn" data-target="slide-5" title="05 Event"><span class="dot-label">05 Event</span></button>
+    <button class="dot-btn" data-target="slide-6" title="06 Heritage"><span class="dot-label">06 Heritage</span></button>
+    <button class="dot-btn" data-target="slide-7" title="07 Art"><span class="dot-label">07 Art</span></button>
+    <button class="dot-btn" data-target="slide-8" title="08 Design Feed"><span class="dot-label">08 Design Feed</span></button>
+    <button class="dot-btn" data-target="slide-9" title="09 Feed & Story"><span class="dot-label">09 Feed &amp; Story</span></button>
+    <button class="dot-btn" data-target="slide-10" title="10 Design Logo"><span class="dot-label">10 Design Logo</span></button>
+    <button class="dot-btn" data-target="slide-11" title="11 Design Brosur"><span class="dot-label">11 Design Brosur</span></button>
+    <button class="dot-btn" data-target="slide-12" title="12 Design Vektor"><span class="dot-label">12 Design Vektor</span></button>
+    <button class="dot-btn" data-target="slide-13" title="13 Design Produk"><span class="dot-label">13 Design Produk</span></button>
+    <button class="dot-btn" data-target="slide-14" title="14 Mockup"><span class="dot-label">14 Mockup</span></button>
+    <button class="dot-btn" data-target="slide-15" title="15 Thank You"><span class="dot-label">15 Thank You</span></button>
+  </nav>
+
+  <!-- ===================================================================
+       SLIDE 1: COVER (MY PORT-FOLIO 2026) - EXACT MATCH TO VIDEO
+       =================================================================== -->
+  <section class="slide-section slide-cover is-visible" id="slide-1">
+    <div class="star-spark" style="top: 14%; right: 12%;">
+      <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+    </div>
+
+    <div class="cover-left">
+      <p class="cover-discipline-top">PHOTOGRAPHY &amp; MULTIMEDIA</p>
+      <h1 class="cover-headline-anton">
+        <span class="line-my">MY</span>
+        <span class="line-port">PORT-</span>
+        <span class="line-folio">FOLIO <span class="year-black">2026</span></span>
+      </h1>
+      <p class="cover-discipline-bottom">DESIGN GRAFIS &middot; PAUV SONEASA</p>
+    </div>
+
+    <div class="cover-right-presenter">
+      <img src="./assets/profile/pauv_presenter_cutout.png" alt="Pauv Soneasa Seated with Laptop" loading="eager">
+    </div>
+
+    <a href="#slide-2" class="slide-arrow-btn" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 2: ABOUT ME? - EXACT MATCH TO VIDEO
+       =================================================================== -->
+  <section class="slide-section slide-about" id="slide-2">
+    <div class="star-spark" style="top: 10%; right: 8%;">
+      <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+    </div>
+
+    <div class="about-photo-wrap">
+      <img src="./assets/profile/pauv_standing_bw.png" alt="Pauv Soneasa Standing with Tablet" loading="lazy">
+    </div>
+
+    <div class="about-text-wrap">
+      <h2 class="about-title-playfair">About me?</h2>
+      <p class="about-desc-p">
+        Saya <strong>Pauv Soneasa</strong>, mahasiswa aktif IT jurusan <strong>Computer Multimedia Design (CMD)</strong> di <strong>BELTEI International University (Tahun 3)</strong>. Memiliki ketertarikan di bidang <strong>Design Grafis, Photography, Prepress Printing</strong>, serta mampu bekerja secara individu maupun tim, dan siap berkembang serta berkontribusi di dunia kreatif.
+      </p>
+
+      <div class="contact-pills">
+        <a href="tel:+85592435513" class="c-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>+855 092 435 513</span>
+        </a>
+        <a href="https://t.me/soneasa_cmd" target="_blank" class="c-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <span>pauv_soneasa</span>
+        </a>
+      </div>
+    </div>
+
+    <a href="#slide-3" class="slide-arrow-btn" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 3: PREWEDDING & ENGAGEMENT / SOCIAL CAMPAIGNS (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-h-top-red" id="slide-3">
+    <div class="h-red-band">
+      <div class="grid-4-polaroids">
+        <div class="card-frame" data-id="1">
+          <img src="./assets/artworks/thumbs/artwork_03_thumb.jpg" alt="Campaign 1">
+          <div class="card-caption">Beauty Series</div>
+        </div>
+        <div class="card-frame" data-id="3">
+          <img src="./assets/artworks/thumbs/artwork_05_thumb.jpg" alt="Campaign 2">
+          <div class="card-caption">Sneaker Care</div>
+        </div>
+        <div class="card-frame" data-id="4">
+          <img src="./assets/artworks/thumbs/artwork_06_thumb.jpg" alt="Campaign 3">
+          <div class="card-caption">Culinary Feast</div>
+        </div>
+        <div class="card-frame" data-id="5">
+          <img src="./assets/artworks/thumbs/artwork_07_thumb.jpg" alt="Campaign 4">
+          <div class="card-caption">Lunar New Year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-white-band">
+      <div class="contact-pills" style="position: absolute; left: 6vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+      </div>
+
+      <h2 class="h-slide-title">Prewedding &amp; Engagement</h2>
+      <p class="h-slide-sub">Borann Center &middot; BG Cream &middot; Tahun 2024</p>
+
+      <div class="contact-pills" style="position: absolute; right: 8vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+    </div>
+
+    <a href="#slide-4" class="slide-arrow-btn" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 4: PHOTO PRODUK (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-h-top-white" id="slide-4">
+    <div class="h-white-band" style="height: 35%;">
+      <div class="contact-pills" style="position: absolute; left: 6vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+      </div>
+
+      <h2 class="h-slide-title">Photo Produk</h2>
+      <p class="h-slide-sub">Tahun 2024</p>
+
+      <div class="contact-pills" style="position: absolute; right: 8vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <a href="#slide-5" class="slide-arrow-btn arrow-top-right" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+
+    <div class="h-red-band" style="height: 65%;">
+      <div class="grid-4-polaroids">
+        <div class="card-frame" data-id="4">
+          <img src="./assets/artworks/thumbs/artwork_06_thumb.jpg" alt="Culinary Photo 1">
+          <div class="card-caption">Tbal Khmer Fish</div>
+        </div>
+        <div class="card-frame" data-id="8">
+          <img src="./assets/artworks/thumbs/artwork_10_thumb.jpg" alt="Culinary Photo 2">
+          <div class="card-caption">Kroung Meung Spice</div>
+        </div>
+        <div class="card-frame" data-id="11">
+          <img src="./assets/artworks/thumbs/artwork_13_thumb.jpg" alt="Culinary Photo 3">
+          <div class="card-caption">FMCG Retail Pack</div>
+        </div>
+        <div class="card-frame" data-id="1">
+          <img src="./assets/artworks/thumbs/artwork_03_thumb.jpg" alt="Culinary Photo 4">
+          <div class="card-caption">BG Cream Staging</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 5: DOKUMENTASI EVENT (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-h-top-white" id="slide-5">
+    <div class="h-white-band" style="height: 35%;">
+      <div class="contact-pills" style="position: absolute; left: 6vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+      </div>
+
+      <h2 class="h-slide-title">Neasa Event</h2>
+      <p class="h-slide-sub">Tahun 2024 &ndash; 2026</p>
+
+      <div class="contact-pills" style="position: absolute; right: 8vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <a href="#slide-6" class="slide-arrow-btn arrow-top-right" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+
+    <div class="h-red-band" style="height: 65%;">
+      <div class="grid-4-polaroids">
+        <div class="card-frame" data-id="9">
+          <img src="./assets/artworks/thumbs/artwork_11_thumb.jpg" alt="Event 1">
+          <div class="card-caption">SAAC Himawari Stand</div>
+        </div>
+        <div class="card-frame" data-id="10">
+          <img src="./assets/artworks/thumbs/artwork_12_thumb.jpg" alt="Event 2">
+          <div class="card-caption">Sabara Angkor Backdrop</div>
+        </div>
+        <div class="card-frame" data-id="13">
+          <img src="./assets/artworks/thumbs/artwork_15_thumb.jpg" alt="Event 3">
+          <div class="card-caption">Jobs Phnom Penh</div>
+        </div>
+        <div class="card-frame" data-id="14">
+          <img src="./assets/artworks/thumbs/artwork_16_thumb.jpg" alt="Event 4">
+          <div class="card-caption">Royal Ceremony Stand</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 6: RANDOM PHOTO / CULTURAL & HERITAGE (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-v-left-white" id="slide-6">
+    <div class="v-white-pane">
+      <div class="star-spark" style="bottom: 12%; left: 8%;">
+        <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+      </div>
+
+      <h2 class="v-slide-title">Random Photo</h2>
+      <p class="v-slide-sub">Tahun 2024</p>
+
+      <div class="card-frame" data-id="8" style="width: 280px; height: 180px; margin-bottom: 24px;">
+        <img src="./assets/artworks/thumbs/artwork_10_thumb.jpg" alt="Random Photo Landscape">
+      </div>
+
+      <div class="contact-pills">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <a href="#slide-7" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+
+    <div class="v-red-pane">
+      <div style="display: flex; gap: 20px;">
+        <div class="card-frame" data-id="7" style="width: 240px; height: 350px;">
+          <img src="./assets/artworks/thumbs/artwork_09_thumb.jpg" alt="Royal Heritage Photo">
+          <div class="card-caption">Heritage Tribute</div>
+        </div>
+        <div class="card-frame" data-id="14" style="width: 240px; height: 350px;">
+          <img src="./assets/artworks/thumbs/artwork_16_thumb.jpg" alt="Cambodian Landmark">
+          <div class="card-caption">National Crest</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 7: ART (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-h-top-red" id="slide-7">
+    <div class="h-red-band" style="height: 70%;">
+      <div class="grid-art-gallery">
+        <div class="card-frame" data-id="1"><img src="./assets/artworks/thumbs/artwork_01_thumb.jpg" alt="Art 1"></div>
+        <div class="card-frame" data-id="2"><img src="./assets/artworks/thumbs/artwork_02_thumb.jpg" alt="Art 2"></div>
+        <div class="card-frame" data-id="3"><img src="./assets/artworks/thumbs/artwork_03_thumb.jpg" alt="Art 3"></div>
+        <div class="card-frame" data-id="4"><img src="./assets/artworks/thumbs/artwork_05_thumb.jpg" alt="Art 4"></div>
+        <div class="card-frame" data-id="5"><img src="./assets/artworks/thumbs/artwork_07_thumb.jpg" alt="Art 5"></div>
+        <div class="card-frame" data-id="7"><img src="./assets/artworks/thumbs/artwork_09_thumb.jpg" alt="Art 6"></div>
+        <div class="card-frame" data-id="8"><img src="./assets/artworks/thumbs/artwork_10_thumb.jpg" alt="Art 7"></div>
+        <div class="card-frame" data-id="10"><img src="./assets/artworks/thumbs/artwork_12_thumb.jpg" alt="Art 8"></div>
+        <div class="card-frame" data-id="11"><img src="./assets/artworks/thumbs/artwork_13_thumb.jpg" alt="Art 9"></div>
+        <div class="card-frame" data-id="12"><img src="./assets/artworks/thumbs/artwork_14_thumb.jpg" alt="Art 10"></div>
+        <div class="card-frame" data-id="14"><img src="./assets/artworks/thumbs/artwork_16_thumb.jpg" alt="Art 11"></div>
+        <div class="card-frame" data-id="15"><img src="./assets/artworks/thumbs/artwork_17_thumb.jpg" alt="Art 12"></div>
+        <div class="card-frame" data-id="16"><img src="./assets/artworks/thumbs/artwork_18_thumb.jpg" alt="Art 13"></div>
+        <div class="card-frame" data-id="17"><img src="./assets/artworks/thumbs/artwork_19_thumb.jpg" alt="Art 14"></div>
+      </div>
+    </div>
+
+    <div class="h-white-band" style="height: 30%;">
+      <div class="contact-pills" style="position: absolute; left: 6vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+      </div>
+
+      <h2 class="h-slide-title">Art</h2>
+      <p class="h-slide-sub">Tahun 2023 &ndash; 2026</p>
+
+      <div class="contact-pills" style="position: absolute; right: 8vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+    </div>
+
+    <a href="#slide-8" class="slide-arrow-btn" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 8: DESIGN FEED (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-v-left-red" id="slide-8">
+    <div class="v-red-pane">
+      <div class="grid-story-cards" style="grid-template-columns: repeat(3, 1fr); max-width: 520px;">
+        <div class="card-frame" data-id="1" style="aspect-ratio: 1/1; height: 140px;"><img src="./assets/artworks/thumbs/artwork_03_thumb.jpg" alt="Feed 1"></div>
+        <div class="card-frame" data-id="3" style="aspect-ratio: 1/1; height: 140px;"><img src="./assets/artworks/thumbs/artwork_05_thumb.jpg" alt="Feed 2"></div>
+        <div class="card-frame" data-id="4" style="aspect-ratio: 1/1; height: 140px;"><img src="./assets/artworks/thumbs/artwork_06_thumb.jpg" alt="Feed 3"></div>
+        <div class="card-frame" data-id="5" style="aspect-ratio: 1/1; height: 140px;"><img src="./assets/artworks/thumbs/artwork_07_thumb.jpg" alt="Feed 4"></div>
+        <div class="card-frame" data-id="8" style="aspect-ratio: 1/1; height: 140px;"><img src="./assets/artworks/thumbs/artwork_10_thumb.jpg" alt="Feed 5"></div>
+        <div class="card-frame" data-id="11" style="aspect-ratio: 1/1; height: 140px;"><img src="./assets/artworks/thumbs/artwork_13_thumb.jpg" alt="Feed 6"></div>
+      </div>
+    </div>
+
+    <div class="v-white-pane">
+      <div class="contact-pills" style="margin-bottom: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <div class="star-spark" style="top: 35%; right: 10%;">
+        <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+      </div>
+
+      <h2 class="v-slide-title">Design Feed</h2>
+      <p class="v-slide-sub">Tahun 2026</p>
+      <p class="v-slide-desc">
+        Desain poster promosi feed Instagram &amp; Facebook untuk produk kecantikan, restoran kuliner, dan layanan laundry sepatu.
+      </p>
+
+      <a href="#slide-9" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 9: DESIGN FEED & STORY (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-v-left-red" id="slide-9">
+    <div class="v-red-pane">
+      <div class="grid-story-cards">
+        <div class="card-frame" data-id="1"><img src="./assets/artworks/thumbs/artwork_01_thumb.jpg" alt="Story 1"></div>
+        <div class="card-frame" data-id="2"><img src="./assets/artworks/thumbs/artwork_02_thumb.jpg" alt="Story 2"></div>
+        <div class="card-frame" data-id="3"><img src="./assets/artworks/thumbs/artwork_03_thumb.jpg" alt="Story 3"></div>
+        <div class="card-frame" data-id="5"><img src="./assets/artworks/thumbs/artwork_05_thumb.jpg" alt="Story 4"></div>
+        <div class="card-frame" data-id="6"><img src="./assets/artworks/thumbs/artwork_06_thumb.jpg" alt="Story 5"></div>
+        <div class="card-frame" data-id="7"><img src="./assets/artworks/thumbs/artwork_07_thumb.jpg" alt="Story 6"></div>
+        <div class="card-frame" data-id="9"><img src="./assets/artworks/thumbs/artwork_11_thumb.jpg" alt="Story 7"></div>
+        <div class="card-frame" data-id="17"><img src="./assets/artworks/thumbs/artwork_19_thumb.jpg" alt="Story 8"></div>
+      </div>
+    </div>
+
+    <div class="v-white-pane">
+      <div class="contact-pills" style="margin-bottom: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <div class="star-spark" style="top: 35%; right: 10%;">
+        <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+      </div>
+
+      <h2 class="v-slide-title">Design Feed<br>&amp; Story</h2>
+      <p class="v-slide-sub">Tahun 2025 &ndash; 2026</p>
+      <p class="v-slide-desc">
+        Format vertikal rasio 9:16 untuk story Facebook, Instagram, dan TikTok dengan visual dinamis &amp; tipografi terarah.
+      </p>
+
+      <a href="#slide-10" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 10: DESIGN LOGO (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-h-top-white" id="slide-10">
+    <div class="h-red-band" style="height: 65%;">
+      <div class="grid-logo-cards">
+        <div class="card-frame" data-id="16"><img src="./assets/artworks/thumbs/artwork_18_thumb.jpg" alt="CSL Logo"></div>
+        <div class="card-frame" data-id="15"><img src="./assets/artworks/thumbs/artwork_17_thumb.jpg" alt="BRT Logo"></div>
+        <div class="card-frame" data-id="12"><img src="./assets/artworks/thumbs/artwork_14_thumb.jpg" alt="iOne Apple"></div>
+        <div class="card-frame" data-id="13"><img src="./assets/artworks/thumbs/artwork_15_thumb.jpg" alt="Jobs Phnom Penh"></div>
+        <div class="card-frame" data-id="3"><img src="./assets/artworks/thumbs/artwork_05_thumb.jpg" alt="BSL Monogram"></div>
+        <div class="card-frame" data-id="6"><img src="./assets/artworks/thumbs/artwork_08_thumb.jpg" alt="Official Stamp"></div>
+      </div>
+    </div>
+
+    <div class="h-white-band" style="height: 35%;">
+      <div class="contact-pills" style="position: absolute; left: 6vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+      </div>
+
+      <h2 class="h-slide-title">Design Logo</h2>
+      <p class="h-slide-sub">Tahun 2025 &ndash; 2026</p>
+
+      <div class="contact-pills" style="position: absolute; right: 8vw;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+    </div>
+
+    <a href="#slide-11" class="slide-arrow-btn" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 11: DESIGN BROSUR (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-v-left-white" id="slide-11">
+    <div class="v-white-pane">
+      <div class="contact-pills" style="margin-bottom: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <div class="star-spark" style="bottom: 15%; left: 8%;">
+        <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+      </div>
+
+      <h2 class="v-slide-title">Design Brosur</h2>
+      <p class="v-slide-sub">Tahun 2026</p>
+      <p class="v-slide-desc">
+        Brosur lipat tiga (tri-fold) cetak prepress CMYK untuk tur internasional CSL Travel dan panduan layanan BRT Cleaning.
+      </p>
+
+      <a href="#slide-12" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+
+    <div class="v-red-pane">
+      <div style="display: flex; gap: 24px;">
+        <div class="card-frame" data-id="2" style="width: 250px; height: 360px;">
+          <img src="./assets/artworks/thumbs/artwork_04_thumb.jpg" alt="Brosur 1">
+          <div class="card-caption">CSL Travel Tri-Fold</div>
+        </div>
+        <div class="card-frame" data-id="6" style="width: 250px; height: 360px;">
+          <img src="./assets/artworks/thumbs/artwork_08_thumb.jpg" alt="Brosur 2">
+          <div class="card-caption">BRT Home Tri-Fold</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 12: DESIGN VEKTOR (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-v-left-red" id="slide-12">
+    <div class="v-red-pane">
+      <div style="display: flex; gap: 16px;">
+        <div class="card-frame" data-id="7" style="width: 175px; height: 300px;"><img src="./assets/artworks/thumbs/artwork_09_thumb.jpg" alt="Vector 1"></div>
+        <div class="card-frame" data-id="14" style="width: 175px; height: 300px;"><img src="./assets/artworks/thumbs/artwork_16_thumb.jpg" alt="Vector 2"></div>
+        <div class="card-frame" data-id="12" style="width: 175px; height: 300px;"><img src="./assets/artworks/thumbs/artwork_14_thumb.jpg" alt="Vector 3"></div>
+      </div>
+    </div>
+
+    <div class="v-white-pane">
+      <div class="star-spark" style="top: 25%; right: 10%;">
+        <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+      </div>
+
+      <h2 class="v-slide-title">Design Vektor</h2>
+      <p class="v-slide-sub">Tahun 2025</p>
+      <p class="v-slide-desc">
+        Ilustrasi vektor figuratif, tracing garis presisi tinggi, dan pewarnaan digital bertema seni kebudayaan.
+      </p>
+
+      <div class="contact-pills" style="margin-top: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <a href="#slide-13" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 13: DESIGN PRODUK (EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-v-left-red" id="slide-13">
+    <div class="v-red-pane">
+      <div style="display: flex; gap: 20px;">
+        <div class="card-frame" data-id="1" style="width: 250px; height: 270px;">
+          <img src="./assets/artworks/thumbs/artwork_03_thumb.jpg" alt="Produk 1">
+          <div class="card-caption">BG Cream Staging</div>
+        </div>
+        <div class="card-frame" data-id="11" style="width: 250px; height: 270px;">
+          <img src="./assets/artworks/thumbs/artwork_13_thumb.jpg" alt="Produk 2">
+          <div class="card-caption">Kroung Meung Spice</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v-white-pane">
+      <div class="contact-pills" style="margin-bottom: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <div class="star-spark" style="top: 35%; right: 10%;">
+        <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+      </div>
+
+      <h2 class="v-slide-title">Design Produk</h2>
+      <p class="v-slide-sub">Tahun 2025</p>
+      <p class="v-slide-desc">
+        Visualisasi kemasan botol kosmetik, label produk makanan lokal, dan mockup kaleng minuman komersial.
+      </p>
+
+      <a href="#slide-14" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 14: MOCKUP (DIAGONAL SPLIT - EXACT MATCH)
+       =================================================================== -->
+  <section class="slide-section slide-diagonal" id="slide-14">
+    <div class="diagonal-red-bg">
+      <div class="grid-mockup-cards">
+        <div class="card-frame" data-id="15"><img src="./assets/artworks/thumbs/artwork_17_thumb.jpg" alt="ID Card Mockup"></div>
+        <div class="card-frame" data-id="16"><img src="./assets/artworks/thumbs/artwork_18_thumb.jpg" alt="Logo Stamp Mockup"></div>
+        <div class="card-frame" data-id="6"><img src="./assets/artworks/thumbs/artwork_08_thumb.jpg" alt="Brochure Mockup"></div>
+        <div class="card-frame" data-id="2"><img src="./assets/artworks/thumbs/artwork_04_thumb.jpg" alt="Leaflet Mockup"></div>
+        <div class="card-frame" data-id="9"><img src="./assets/artworks/thumbs/artwork_11_thumb.jpg" alt="I-Stand Mockup"></div>
+        <div class="card-frame" data-id="10"><img src="./assets/artworks/thumbs/artwork_12_thumb.jpg" alt="Stage Mockup"></div>
+      </div>
+    </div>
+
+    <div class="diagonal-white-content">
+      <div class="contact-pills" style="margin-bottom: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
+      </div>
+
+      <h2 class="v-slide-title">Mockup</h2>
+      <p class="v-slide-sub">Tahun 2025 &ndash; 2026</p>
+      <p class="v-slide-desc">
+        Penerapan visual pada kartu identitas lanyard RFID, kartu nama eksekutif foil emas, dan banner stan pameran.
+      </p>
+
+      <div class="contact-pills" style="margin-top: 24px;">
+        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
+      </div>
+
+      <a href="#slide-15" class="slide-arrow-btn" aria-label="Next Slide">
+        <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       SLIDE 15: THANK YOU (EXACT MATCH TO VIDEO)
+       =================================================================== -->
+  <section class="slide-section slide-thank-you" id="slide-15">
+    <div class="star-spark" style="top: 15%; right: 10%;">
+      <svg viewBox="0 0 100 100"><path d="M50 0 C50 35 65 50 100 50 C65 50 50 65 50 100 C50 65 35 50 0 50 C35 50 50 35 50 0 Z"/></svg>
+    </div>
+
+    <div class="contact-pills" style="position: absolute; top: 30px; left: 6vw;">
+      <a href="tel:+85592435513" class="c-pill" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span>+855 092 435 513</span>
+      </a>
+    </div>
+
+    <div class="contact-pills" style="position: absolute; bottom: 35%; right: 10vw;">
+      <a href="https://t.me/soneasa_cmd" target="_blank" class="c-pill" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>
+        <span>pauv_soneasa</span>
+      </a>
+    </div>
+
+    <div class="thank-you-layout">
+      <div class="thank-you-text-bg">
+        <div class="thank-you-row-1">THAN</div>
+        <div class="thank-you-row-2">
+          <span>NK</span>
+          <span>YOU</span>
+        </div>
+      </div>
+
+      <div class="thank-you-seated-cutout">
+        <img src="./assets/profile/pauv_presenter_cutout.png" alt="Pauv Soneasa Seated with Laptop">
+      </div>
+    </div>
+
+    <a href="#slide-1" class="restart-deck-btn" aria-label="Restart Deck">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+      <span>RESTART DECK</span>
+    </a>
+  </section>
+
+  <!-- ===================================================================
+       ULTRA-CRISP HD LIGHTBOX INSPECTION MODAL
+       =================================================================== -->
+  <div class="deck-lightbox" id="deckLightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="lightbox-overlay" id="lightboxOverlay"></div>
+    <div class="lightbox-dialog">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Preview">&times;</button>
+      <div class="lightbox-media-wrap">
+        <img src="" alt="Artwork Preview" id="lightboxMediaImg">
+      </div>
+      <div class="lightbox-info-wrap">
+        <div>
+          <div class="lightbox-tag-row">
+            <span class="lightbox-cat-badge" id="lightboxCategory">BRANDING</span>
+            <span class="lightbox-client-tag" id="lightboxClient">Borann Center</span>
+          </div>
+          <h3 class="lightbox-title" id="lightboxTitle">Project Title</h3>
+          <p class="lightbox-desc" id="lightboxDesc">Project Summary</p>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #666; margin-bottom: 6px;">BRAND COLOR PALETTE:</div>
+          <div class="lightbox-palette-strip" id="lightboxPalette"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Autoplay State Toast Feedback -->
+  <div class="deck-toast-pill" id="deckToast" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="./projects-data.js"></script>
+  <script src="./deck.js"></script>
+</body>
+</html>

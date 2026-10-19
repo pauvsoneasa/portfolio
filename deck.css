@@ -1,0 +1,1339 @@
+/* ===================================================================
+   PAUV SONEASA &mdash; PRESENTATION SLIDE DECK (RYAN SAPUTRA STYLE)
+   High-Fidelity 1:1 Match of @buknbedesss & Enhanced Editorial Engine
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700;1,900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --red: #0284c7;
+  --red-dark: #0369a1;
+  --red-light: #38bdf8;
+  --red-glow: rgba(14, 165, 233, 0.35);
+  --white: #ffffff;
+  --paper-soft: #fafafa;
+  --dark: #0f1117;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+  --border-light: rgba(0, 0, 0, 0.08);
+
+  --font-anton: 'Anton', 'Bebas Neue', Impact, sans-serif;
+  --font-bebas: 'Bebas Neue', 'Anton', Impact, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  background-color: var(--white);
+}
+
+body {
+  background-color: var(--white);
+  font-family: var(--font-body);
+  color: var(--dark);
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Slim Top Autoplay Progress Bar */
+.deck-top-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, #04098a, #38bdf8);
+  z-index: 10001;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.7), 0 0 4px #38bdf8;
+}
+
+/* Floating Top Switcher Bar (Minimal, Sleek Glassmorphism) */
+.deck-top-switcher {
+  position: fixed;
+  top: 16px;
+  left: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.deck-switcher-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border-light);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+  transition: all 0.25s var(--ease);
+}
+
+.deck-switcher-btn:hover {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--red-glow);
+}
+
+.deck-controls-cluster {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deck-control-pill {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border-light);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--dark);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s var(--ease);
+}
+
+.deck-control-pill:hover {
+  border-color: var(--red);
+  color: var(--red);
+  transform: translateY(-1px);
+}
+
+.deck-control-pill.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow: 0 6px 20px var(--red-glow);
+}
+
+.deck-pill-counter {
+  color: var(--red);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* Side Dots Navigation (Right Edge Scrubber) */
+.deck-dots-nav {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9990;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 4px;
+}
+
+.dot-btn {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s var(--ease);
+}
+
+.dot-btn:hover {
+  background: var(--red);
+  transform: scale(1.35);
+}
+
+.dot-btn.active {
+  background: var(--red);
+  transform: scale(1.5);
+  box-shadow: 0 0 10px var(--red-glow);
+}
+
+.dot-btn .dot-label {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: #111111;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s var(--ease);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dot-btn:hover .dot-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Master Slide Viewport: Each Slide Fills 100vh Fullscreen */
+.slide-section {
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+}
+
+/* Glowing 4-Point Star Spark (Ryan Saputra Signature Orbit & Pulse) */
+.star-spark {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.88;
+  animation: starOrbitPulse 12s linear infinite;
+}
+
+@keyframes starOrbitPulse {
+  0% { transform: scale(0.94) rotate(0deg); opacity: 0.78; }
+  50% { transform: scale(1.06) rotate(180deg); opacity: 0.98; }
+  100% { transform: scale(0.94) rotate(360deg); opacity: 0.78; }
+}
+
+.star-spark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.42) 0%, rgba(4, 9, 138, 0.16) 45%, transparent 70%);
+  filter: blur(28px);
+}
+
+.star-spark svg {
+  width: 100%;
+  height: 100%;
+  fill: url(#starGradient);
+  filter: drop-shadow(0 0 24px rgba(4, 9, 138, 0.55)) drop-shadow(0 0 10px rgba(56, 189, 248, 0.6));
+}
+
+/* Red Arrow Link (Fixed in Corner of Slide with Subtle Magnetic Pulse) */
+.slide-arrow-btn {
+  position: absolute;
+  bottom: 28px;
+  right: 36px;
+  z-index: 90;
+  color: var(--red);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s var(--ease);
+  text-decoration: none;
+  animation: arrowPromptBounce 2s ease-in-out infinite;
+}
+
+@keyframes arrowPromptBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(7px); }
+}
+
+.slide-arrow-btn svg {
+  width: 44px;
+  height: 44px;
+  stroke: var(--red);
+  stroke-width: 2.6;
+}
+
+.slide-arrow-btn:hover {
+  animation-play-state: paused;
+  transform: translateX(10px) scale(1.15);
+}
+
+.arrow-top-right {
+  bottom: auto;
+  top: 28px;
+  right: 36px;
+}
+
+/* Contact Pills (Phone & Instagram) - Placed on White sections */
+.contact-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 80;
+}
+
+.c-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s var(--ease);
+}
+
+.c-pill:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.c-pill svg {
+  color: var(--red);
+  width: 14px;
+  height: 14px;
+}
+
+/* Framed Polaroid Artwork Cards (Direct Ryan Saputra Match + HD Inspect) */
+.card-frame {
+  background: #ffffff;
+  padding: 8px 8px 12px;
+  border-radius: 2px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: var(--tilt, rotate(0deg));
+}
+
+/* Organic Tactile Angle Stagger (Designer Board Aesthetic) */
+.grid-4-polaroids .card-frame:nth-child(4n + 1),
+.grid-story-cards .card-frame:nth-child(4n + 1),
+.grid-logo-cards .card-frame:nth-child(4n + 1),
+.grid-art-gallery .card-frame:nth-child(4n + 1),
+.grid-mockup-cards .card-frame:nth-child(4n + 1) {
+  --tilt: rotate(-2deg);
+}
+
+.grid-4-polaroids .card-frame:nth-child(4n + 2),
+.grid-story-cards .card-frame:nth-child(4n + 2),
+.grid-logo-cards .card-frame:nth-child(4n + 2),
+.grid-art-gallery .card-frame:nth-child(4n + 2),
+.grid-mockup-cards .card-frame:nth-child(4n + 2) {
+  --tilt: rotate(1.6deg);
+}
+
+.grid-4-polaroids .card-frame:nth-child(4n + 3),
+.grid-story-cards .card-frame:nth-child(4n + 3),
+.grid-logo-cards .card-frame:nth-child(4n + 3),
+.grid-art-gallery .card-frame:nth-child(4n + 3),
+.grid-mockup-cards .card-frame:nth-child(4n + 3) {
+  --tilt: rotate(-1.4deg);
+}
+
+.grid-4-polaroids .card-frame:nth-child(4n + 4),
+.grid-story-cards .card-frame:nth-child(4n + 4),
+.grid-logo-cards .card-frame:nth-child(4n + 4),
+.grid-art-gallery .card-frame:nth-child(4n + 4),
+.grid-mockup-cards .card-frame:nth-child(4n + 4) {
+  --tilt: rotate(2.2deg);
+}
+
+.card-frame::after {
+  content: "INSPECT ↗";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(11, 16, 38, 0.88);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 3px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.2s var(--ease);
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.card-frame:hover {
+  transform: translateY(-10px) rotate(0deg) scale(1.06) !important;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.48), 0 0 24px var(--red-glow);
+  z-index: 20;
+}
+
+.card-frame:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+}
+
+.card-caption {
+  font-family: var(--font-bebas);
+  font-size: 13.5px;
+  letter-spacing: 0.06em;
+  color: #222222;
+  text-align: center;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* ===================================================================
+   SLIDE 1: COVER (MY PORT-FOLIO 2026) - EXACT MATCH
+   =================================================================== */
+.slide-cover {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7vw;
+  position: relative;
+}
+
+.cover-left {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  max-width: 55%;
+}
+
+.cover-discipline-top {
+  font-family: var(--font-bebas);
+  font-size: clamp(16px, 2.2vw, 28px);
+  letter-spacing: 0.32em;
+  color: #111111;
+  margin-bottom: 2px;
+}
+
+.cover-headline-anton {
+  font-family: var(--font-anton);
+  font-size: clamp(90px, 13.5vw, 190px);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.cover-headline-anton .line-my {
+  display: block;
+}
+
+.cover-headline-anton .line-port {
+  display: block;
+}
+
+.cover-headline-anton .line-folio {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.cover-headline-anton .year-black {
+  font-family: var(--font-anton);
+  color: #111111;
+  font-size: 0.48em;
+  letter-spacing: 0.02em;
+}
+
+.cover-discipline-bottom {
+  font-family: var(--font-bebas);
+  font-size: clamp(16px, 2.2vw, 28px);
+  letter-spacing: 0.22em;
+  color: #111111;
+  margin-top: 14px;
+}
+
+.cover-right-presenter {
+  position: relative;
+  height: 92%;
+  width: 48%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
+}
+
+.cover-right-presenter img {
+  max-height: 96%;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 32px rgba(0, 0, 0, 0.16));
+}
+
+/* ===================================================================
+   SLIDE 2: ABOUT ME? (EXACT MATCH)
+   =================================================================== */
+.slide-about {
+  background: var(--white);
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  padding: 0 8vw;
+  position: relative;
+}
+
+.about-photo-wrap {
+  height: 88%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
+}
+
+.about-photo-wrap img {
+  max-height: 94%;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.14));
+}
+
+.about-text-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+  z-index: 10;
+}
+
+.about-title-playfair {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(60px, 8.5vw, 115px);
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.about-desc-p {
+  font-size: clamp(15px, 1.55vw, 19px);
+  line-height: 1.7;
+  color: #2b303c;
+  max-width: 48ch;
+  margin-bottom: 32px;
+}
+
+.about-desc-p strong {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* ===================================================================
+   SPLIT SCREEN SLIDES (HORIZONTAL / VERTICAL)
+   =================================================================== */
+
+/* Top Red (65%) / Bottom White (35%) */
+.slide-h-top-red {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.h-red-band {
+  height: 65%;
+  background: var(--red);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 40px;
+  position: relative;
+}
+
+.h-white-band {
+  height: 35%;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.h-slide-title {
+  font-family: var(--font-anton);
+  font-size: clamp(40px, 5.5vw, 76px);
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-align: center;
+}
+
+.h-slide-sub {
+  font-family: var(--font-bebas);
+  font-size: clamp(16px, 1.8vw, 24px);
+  color: #666666;
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* Top White (35%) / Bottom Red (65%) */
+.slide-h-top-white {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* Vertical Split: Left Red (52%) / Right White (48%) */
+.slide-v-left-red {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  width: 100%;
+  height: 100%;
+}
+
+.v-red-pane {
+  background: var(--red);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
+  position: relative;
+}
+
+.v-white-pane {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 50px;
+  position: relative;
+}
+
+.v-slide-title {
+  font-family: var(--font-anton);
+  font-size: clamp(48px, 6.8vw, 92px);
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  margin-bottom: 10px;
+}
+
+.v-slide-sub {
+  font-family: var(--font-bebas);
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: #666666;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.v-slide-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555555;
+  max-width: 38ch;
+}
+
+/* Vertical Split: Left White (48%) / Right Red (52%) */
+.slide-v-left-white {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  width: 100%;
+  height: 100%;
+}
+
+/* Diagonal Split (Mockup Slide) */
+.slide-diagonal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: var(--white);
+}
+
+.diagonal-red-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  background: var(--red);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  clip-path: polygon(0 0, 100% 0, 74% 100%, 0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 80px 40px 40px;
+  z-index: 2;
+}
+
+.diagonal-white-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 40px 60px 60px;
+  z-index: 3;
+}
+
+/* Grids in Red Panels */
+.grid-4-polaroids {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 90%;
+  max-width: 1100px;
+}
+
+.grid-4-polaroids .card-frame {
+  height: 270px;
+}
+
+.grid-story-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
+  width: 90%;
+  max-width: 660px;
+}
+
+.grid-story-cards .card-frame {
+  aspect-ratio: 9/16;
+  height: 180px;
+  padding: 5px;
+}
+
+.grid-logo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  width: 88%;
+  max-width: 620px;
+}
+
+.grid-logo-cards .card-frame {
+  aspect-ratio: 1/1;
+  height: 145px;
+  padding: 8px;
+}
+
+.grid-art-gallery {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  width: 94%;
+  max-width: 1150px;
+}
+
+.grid-art-gallery .card-frame {
+  height: 145px;
+  padding: 5px;
+}
+
+.grid-mockup-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 88%;
+  max-width: 620px;
+}
+
+.grid-mockup-cards .card-frame {
+  height: 140px;
+  padding: 6px;
+}
+
+/* ===================================================================
+   SLIDE 15: THANK YOU (EXACT MATCH)
+   =================================================================== */
+.slide-thank-you {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.thank-you-layout {
+  position: relative;
+  width: 90%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thank-you-text-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-anton);
+  font-size: clamp(110px, 17vw, 240px);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  color: var(--red);
+  text-transform: uppercase;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.thank-you-row-1 {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 4vw;
+}
+
+.thank-you-row-2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4vw;
+}
+
+.thank-you-seated-cutout {
+  position: relative;
+  z-index: 5;
+  height: 86%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.thank-you-seated-cutout img {
+  max-height: 96%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.2));
+}
+
+.restart-deck-btn {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-family: var(--font-bebas);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.35);
+  transition: all 0.25s var(--ease);
+}
+
+.restart-deck-btn:hover {
+  background: var(--red-dark);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(14, 165, 233, 0.55);
+}
+
+/* ===================================================================
+   SLIDE ENTRANCE, TRANSITION & MORPH ANIMATIONS (Direct Ryan Saputra Match)
+   =================================================================== */
+
+/* Kinetic Punch for Big Anton Display Headlines */
+@keyframes kineticPunch {
+  0% {
+    opacity: 0;
+    transform: translateY(54px) scale(0.92) skewY(2.5deg);
+    filter: blur(5px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.02) skewY(-0.5deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) skewY(0);
+    filter: blur(0);
+  }
+}
+
+/* Graceful Cursive Reveal for Playfair Italic */
+@keyframes cursiveReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(42px) scale(0.94);
+    letter-spacing: -0.05em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* 3D Staggered Cascade Fan-out for Polaroid Cards */
+@keyframes cascadePolaroid {
+  0% {
+    opacity: 0;
+    transform: perspective(900px) rotateX(25deg) translateY(50px) scale(0.85);
+  }
+  65% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(-4deg) translateY(-5px) scale(1.02) var(--tilt, rotate(0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(900px) rotateX(0deg) translateY(0) scale(1) var(--tilt, rotate(0deg));
+  }
+}
+
+/* Light Gleam Sweep on Polaroid Entrance */
+.card-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.4) 45%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.4) 55%, transparent 80%);
+  transform: translateX(-160%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.slide-section.is-visible .card-frame::before {
+  animation: shineGleam 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shineGleam {
+  0% { transform: translateX(-160%); }
+  100% { transform: translateX(180%); }
+}
+
+/* Character Cutout Entrance and Gentle 3D Float */
+@keyframes characterEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(90px) scale(0.92);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gentleFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+  100% { transform: translateY(0); }
+}
+
+.slide-section.is-visible .cover-right-presenter img,
+.slide-section.is-visible .about-photo-wrap img,
+.slide-section.is-visible .thank-you-seated-cutout img {
+  animation: characterEntrance 0.85s var(--ease-spring) 0.15s both, gentleFloat 5s ease-in-out 1s infinite;
+}
+
+/* Staggered Typography Kinetic Punch */
+.slide-section.is-visible .cover-headline-anton .line-my {
+  animation: kineticPunch 0.75s var(--ease-spring) 0.04s both;
+}
+.slide-section.is-visible .cover-headline-anton .line-port {
+  animation: kineticPunch 0.75s var(--ease-spring) 0.15s both;
+}
+.slide-section.is-visible .cover-headline-anton .line-folio {
+  animation: kineticPunch 0.75s var(--ease-spring) 0.26s both;
+}
+.slide-section.is-visible .cover-headline-anton .year-black {
+  animation: kineticPunch 0.75s var(--ease-spring) 0.36s both;
+}
+
+.slide-section.is-visible .about-title-playfair {
+  animation: cursiveReveal 0.85s var(--ease-spring) 0.08s both;
+}
+
+.slide-section.is-visible .h-slide-title,
+.slide-section.is-visible .v-slide-title {
+  animation: kineticPunch 0.75s var(--ease-spring) both;
+}
+
+/* Card cascade delays */
+.slide-section.is-visible .card-frame:nth-child(1) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.04s both; }
+.slide-section.is-visible .card-frame:nth-child(2) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.11s both; }
+.slide-section.is-visible .card-frame:nth-child(3) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.18s both; }
+.slide-section.is-visible .card-frame:nth-child(4) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.25s both; }
+.slide-section.is-visible .card-frame:nth-child(5) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.32s both; }
+.slide-section.is-visible .card-frame:nth-child(6) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.39s both; }
+.slide-section.is-visible .card-frame:nth-child(7) { animation: cascadePolaroid 0.65s var(--ease-spring) 0.46s both; }
+
+/* Split background panels dynamic morph */
+.h-red-band, .v-red-pane, .diagonal-red-bg {
+  transition: transform 0.65s var(--ease-spring), opacity 0.5s ease;
+}
+
+.slide-section:not(.is-visible) .h-red-band {
+  transform: scaleY(0.92);
+  opacity: 0.8;
+}
+.slide-section.is-visible .h-red-band {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.slide-section:not(.is-visible) .v-red-pane {
+  transform: scaleX(0.92);
+  opacity: 0.8;
+}
+.slide-section.is-visible .v-red-pane {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.slide-section:not(.is-visible) .diagonal-red-bg {
+  transform: translateX(-8%) skewX(-3deg);
+  opacity: 0.7;
+}
+.slide-section.is-visible .diagonal-red-bg {
+  transform: translateX(0) skewX(0);
+  opacity: 1;
+}
+
+/* Toast Notification Feedback Pill */
+.deck-toast-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px);
+  background: rgba(4, 9, 138, 0.94);
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 30px rgba(4, 9, 138, 0.5);
+  backdrop-filter: blur(12px);
+  z-index: 100002;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s var(--ease-spring), opacity 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deck-toast-pill.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.deck-toast-pill span {
+  color: #38bdf8;
+  font-size: 10px;
+}
+
+/* ===================================================================
+   ULTRA-CRISP HD LIGHTBOX INSPECTION MODAL
+   =================================================================== */
+.deck-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease);
+}
+
+.deck-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.88);
+  backdrop-filter: blur(14px);
+}
+
+.lightbox-dialog {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 1020px);
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  transform: scale(0.95) translateY(12px);
+  transition: transform 0.35s var(--ease-spring);
+}
+
+.deck-lightbox.active .lightbox-dialog {
+  transform: scale(1) translateY(0);
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.08);
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: #111111;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s var(--ease);
+}
+
+.lightbox-close-btn:hover {
+  background: var(--red);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.lightbox-media-wrap {
+  background: #f1f3f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.lightbox-media-wrap img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.lightbox-info-wrap {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lightbox-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lightbox-cat-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--red);
+  background: rgba(14, 165, 233, 0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.lightbox-client-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray);
+}
+
+.lightbox-title {
+  font-family: var(--font-anton);
+  font-size: 28px;
+  color: #111111;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.lightbox-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 24px;
+}
+
+.lightbox-palette-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.lightbox-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease);
+}
+
+.lightbox-swatch:hover {
+  transform: scale(1.25);
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN ACROSS ALL SCREENS & DEVICES
+   =================================================================== */
+
+@media (max-width: 1200px) {
+  .grid-art-gallery {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+  }
+  .grid-4-polaroids {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 992px) {
+  .slide-section {
+    min-height: 100vh;
+    height: auto;
+  }
+  .slide-v-left-red,
+  .slide-v-left-white {
+    grid-template-columns: 1fr;
+  }
+  .v-red-pane {
+    padding: 60px 24px;
+  }
+  .v-white-pane {
+    padding: 40px 24px;
+  }
+  .diagonal-red-bg {
+    position: relative;
+    width: 100%;
+    clip-path: none;
+    padding: 40px 20px;
+  }
+  .diagonal-white-content {
+    position: relative;
+    width: 100%;
+    padding: 40px 20px;
+  }
+  .slide-diagonal {
+    flex-direction: column;
+  }
+  .deck-dots-nav {
+    display: none;
+  }
+  .lightbox-dialog {
+    grid-template-columns: 1fr;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-4-polaroids {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-4-polaroids .card-frame {
+    height: 200px;
+  }
+  .grid-story-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cover-left {
+    max-width: 100%;
+  }
+  .cover-right-presenter {
+    display: none;
+  }
+  .slide-cover {
+    padding: 80px 24px;
+  }
+  .slide-about {
+    grid-template-columns: 1fr;
+    padding: 60px 24px;
+  }
+  .about-photo-wrap {
+    height: 320px;
+  }
+  .slide-arrow-btn {
+    bottom: 16px;
+    right: 20px;
+  }
+  .slide-arrow-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+}
