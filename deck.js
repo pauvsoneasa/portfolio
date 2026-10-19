@@ -372,16 +372,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const projectId = card.getAttribute('data-project');
       const imgEl = card.querySelector('img');
       const captionEl = card.querySelector('.card-caption');
+      const fullImg = card.getAttribute('data-full-img') || (imgEl ? imgEl.src : '');
+      const cat = card.getAttribute('data-cat') || 'COMPETITION & EVENTS';
+      const client = card.getAttribute('data-client') || 'Pauv Soneasa Portfolio';
+      const desc = card.getAttribute('data-desc') || '';
 
       let project = null;
       if (projectId && window.portfolioProjects) {
         project = window.portfolioProjects.find(p => p.id === projectId);
       }
-      openLightbox(project, imgEl ? imgEl.src : '', captionEl ? captionEl.textContent : '');
+      openLightbox(project, fullImg, captionEl ? captionEl.textContent : '', cat, client, desc);
     });
   });
 
-  function openLightbox(project, fallbackImg, fallbackTitle) {
+  function openLightbox(project, fallbackImg, fallbackTitle, fallbackCat, fallbackClient, fallbackDesc) {
     if (!lightbox) return;
     pauseAutoplay('PAUSED FOR INSPECTION');
     playBeep(680, 'sine', 0.1);
@@ -413,10 +417,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } else {
       if (lightboxMediaImg) lightboxMediaImg.src = fallbackImg;
-      if (lightboxCategory) lightboxCategory.textContent = 'GRAPHIC DESIGN';
-      if (lightboxClient) lightboxClient.textContent = 'Pauv Soneasa Portfolio';
+      if (lightboxCategory) lightboxCategory.textContent = fallbackCat ? fallbackCat.toUpperCase() : 'GRAPHIC DESIGN';
+      if (lightboxClient) lightboxClient.textContent = fallbackClient || 'Pauv Soneasa Portfolio';
       if (lightboxTitle) lightboxTitle.textContent = fallbackTitle || 'Creative Showcase';
-      if (lightboxDesc) lightboxDesc.textContent = 'High-resolution commercial creative asset crafted by Pauv Soneasa for brand campaigns, social media, and digital print.';
+      if (lightboxDesc) lightboxDesc.textContent = fallbackDesc || 'High-resolution commercial creative asset crafted by Pauv Soneasa for brand campaigns, social media, and digital print.';
       if (lightboxPalette) lightboxPalette.innerHTML = '<span class="lightbox-swatch" style="background-color: #04098a;"></span><span class="lightbox-swatch" style="background-color: #38bdf8;"></span><span class="lightbox-swatch" style="background-color: #ffffff;"></span>';
     }
 

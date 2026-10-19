@@ -631,8 +631,204 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxPalette = document.getElementById('lightboxPalette');
   const lightboxTools = document.getElementById('lightboxTools');
 
+  let lightboxMode = 'project'; // 'project' | 'competition'
+  let activeCompetitionIndex = 0;
+
+  const competitionGalleryItems = [
+    {
+      img: './assets/images/competitions/web/robotic_img_7829.jpg',
+      title: 'Robotics Competition — 2nd Place Honor',
+      desc: 'National Robotics Competition Runner-Up: Autonomous maze traversal, real-time sensor feedback loops, and dual-motor chassis control engineered under high-stakes competitive arena constraints.',
+      category: 'ROBOTICS & ENGINEERING',
+      date: '2023 - 2024',
+      client: 'National Robotics Challenge & IT Step Academy',
+      tools: ['Arduino Microcontroller', 'IR Sensor Array', 'Motor Drivers', 'C++ Logic']
+    },
+    {
+      img: './assets/images/competitions/web/robotic_img_20231216_185703_0159.jpg',
+      title: 'Hardware & Sensor Calibration',
+      desc: 'Bench testing and precision ultrasonic sensor tuning for obstacle avoidance and line-following agility during trial runs.',
+      category: 'HARDWARE ENGINEERING',
+      date: '2023 - 2024',
+      client: 'Robotics Development Lab',
+      tools: ['Sensor Calibration', 'Soldering', 'Chassis Tuning']
+    },
+    {
+      img: './assets/images/competitions/web/robotic_img_7831.jpg',
+      title: 'Robotics Arena Testing',
+      desc: 'Testing autonomous mobile platform navigation dynamics across the tournament obstacle course.',
+      category: 'ARENA TESTING',
+      date: '2023 - 2024',
+      client: 'Robotics Challenge Arena',
+      tools: ['Rapid Prototyping', 'Telemetry Debugging']
+    },
+    {
+      img: './assets/images/competitions/web/worldskill_cambodia_img_7830.jpg',
+      title: 'WorldSkills Cambodia — Graphic Design Technology Finalist',
+      desc: 'National WorldSkills championship in Graphic Design Technology. Multi-day rigorous trade challenge testing vector identity design, editorial layout, and print production packaging under strict international judging criteria.',
+      category: 'WORLDSKILLS COMPETITION',
+      date: '2024',
+      client: 'Ministry of Labour & Vocational Training',
+      tools: ['Adobe Illustrator', 'Adobe InDesign', 'Photoshop', 'Prepress Spec']
+    },
+    {
+      img: './assets/images/competitions/web/worldskill_cambodia_img_7449.jpg',
+      title: 'WorldSkills Stage & Competitor Arena',
+      desc: 'Stage inspection and competitor workstation review with national jury evaluators and technical delegates.',
+      category: 'WORLDSKILLS CAMBODIA',
+      date: '2024',
+      client: 'WorldSkills Secretariat',
+      tools: ['Technical Workstation', 'Visual Design']
+    },
+    {
+      img: './assets/images/competitions/web/worldskill_cambodia_img_7480.jpg',
+      title: 'Live Workstation Design Sprint',
+      desc: 'High-focus speed design challenge producing branding collaterals and multi-page layouts under timed benchmark modules.',
+      category: 'WORLDSKILLS ARENA',
+      date: '2024',
+      client: 'WorldSkills Cambodia',
+      tools: ['Vector Layout', 'Print Packaging']
+    },
+    {
+      img: './assets/images/competitions/web/worldskill_cambodia_img_7481.jpg',
+      title: 'Final Submission & Review',
+      desc: 'Prepress color management inspection, CMYK calibration, and packaging mockup proofing ready for final jury assessment.',
+      category: 'WORLDSKILLS ARENA',
+      date: '2024',
+      client: 'WorldSkills Cambodia',
+      tools: ['CMYK Proofing', 'Production File Standards']
+    },
+    {
+      img: './assets/images/competitions/web/public_speaking_img_5232.jpg',
+      title: 'Public Speaking Competition Final',
+      desc: 'Live stage keynote delivery and leadership presentation communicating creative vision, technological impact, and persuasive storytelling.',
+      category: 'ORATORY & SPEECH',
+      date: '2024',
+      client: 'Public Speaking & Leadership Forum',
+      tools: ['Keynote Presentation', 'Stage Presence', 'Storytelling']
+    },
+    {
+      img: './assets/images/competitions/web/public_speaking_img_5235.jpg',
+      title: 'Stage Address Delivery',
+      desc: 'Live address before judicial panel and audience discussing youth empowerment and technological creativity.',
+      category: 'PUBLIC SPEAKING',
+      date: '2024',
+      client: 'Leadership Forum',
+      tools: ['Audience Engagement', 'Rhetoric']
+    },
+    {
+      img: './assets/images/competitions/web/public_speaking_img_5239.jpg',
+      title: 'Q&A Judicial Defense',
+      desc: 'Defending thesis proposals and answering jury inquiries during the final round of the speech tournament.',
+      category: 'PUBLIC SPEAKING',
+      date: '2024',
+      client: 'Public Speaking Forum',
+      tools: ['Live Defense', 'Critical Thinking']
+    },
+    {
+      img: './assets/images/competitions/web/public_speaking_img_5749.jpg',
+      title: 'Certificate of Distinction',
+      desc: 'Official certificate of distinction awarded by the judges and tournament organizers.',
+      category: 'HONORS & RECOGNITION',
+      date: '2024',
+      client: 'Leadership Committee',
+      tools: ['Distinction Award', 'Public Speaking Merit']
+    },
+    {
+      img: './assets/images/competitions/web/public_speaking_img_5754.jpg',
+      title: 'Finalist Cohort Celebration',
+      desc: 'Finalist cohort stage celebration with judges, coaches, and academic mentors.',
+      category: 'PUBLIC SPEAKING',
+      date: '2024',
+      client: 'Leadership Forum',
+      tools: ['Cohort Celebration', 'Community Engagement']
+    },
+    {
+      img: './assets/images/competitions/web/workshop_fb_img_1686049170737.jpg',
+      title: 'Design Thinking & Technical Workshop',
+      desc: 'Collaborative design thinking workshop and agile digital production training with industry mentors.',
+      category: 'PROFESSIONAL WORKSHOP',
+      date: '2023 - 2024',
+      client: 'Creative Mentorship Program',
+      tools: ['Design Thinking', 'Ideation Sprint', 'Rapid Prototyping']
+    },
+    {
+      img: './assets/images/competitions/web/workshop_fb_img_1686315245483.jpg',
+      title: 'Workshop Group Certification',
+      desc: 'Team completion certification and project presentation for innovative physical and digital packaging solutions.',
+      category: 'CREATIVE WORKSHOPS',
+      date: '2023',
+      client: 'Design Lab',
+      tools: ['Group Presentation', 'Certification']
+    },
+    {
+      img: './assets/images/competitions/web/event_untitled_shoot-09778.jpg',
+      title: 'National Stage Gala Ceremony',
+      desc: 'Formal ceremony and institutional gala stage recognition for outstanding young creators and technological innovators.',
+      category: 'NATIONAL CEREMONY',
+      date: '2024',
+      client: 'National Event Gala',
+      tools: ['Gala Recognition', 'Institutional Award']
+    },
+    {
+      img: './assets/images/competitions/web/event_img_6922.jpg',
+      title: 'Academic Distinction & Best Seller',
+      desc: 'Best Seller Award for retail packaging & sales at Happy Chandara School, plus Foundation Year Academic Distinction at BELTEI International University.',
+      category: 'ACADEMIC HONORS',
+      date: '2024',
+      client: 'BELTEI & Happy Chandara',
+      tools: ['Academic Distinction', 'Sales Merit']
+    },
+    {
+      img: './assets/images/competitions/web/event_img_1886.jpg',
+      title: 'BELTEI University Campus Ceremony',
+      desc: 'Campus 1 Awarding Ceremony celebration recognizing top academic performers in foundation year programs.',
+      category: 'BELTEI INTERNATIONAL UNIV',
+      date: '2024',
+      client: 'BELTEI Academic Council',
+      tools: ['Academic Excellence', 'Honor Roll']
+    },
+    {
+      img: './assets/images/competitions/web/event_img_1890.jpg',
+      title: 'Honor Medal & Certificate Presentation',
+      desc: 'Stage recognition moment receiving the honors medal and certificate from university leadership.',
+      category: 'HONORS & AWARDS',
+      date: '2024',
+      client: 'Awarding Committee',
+      tools: ['Medal of Honor', 'Academic Recognition']
+    },
+    {
+      img: './assets/images/summer camp/web/IMG_6209.jpg',
+      title: 'Youth Technology Summer Camp',
+      desc: 'Collaborative team workshops, outdoor challenges, and leadership activities empowering young students in technology and creative problem solving.',
+      category: 'LEADERSHIP & SUMMER CAMP',
+      date: '2024',
+      client: 'Youth Summer Camp Program',
+      tools: ['Team Leadership', 'Mentorship', 'Youth Engagement']
+    },
+    {
+      img: './assets/images/summer camp/web/IMG_6213.jpg',
+      title: 'Camp Workshop Collaboration',
+      desc: 'Active team discussion and project presentation during the summer camp skill building sessions.',
+      category: 'SUMMER CAMP',
+      date: '2024',
+      client: 'Youth Summer Camp',
+      tools: ['Workshop Mentorship', 'Collaboration']
+    },
+    {
+      img: './assets/images/summer camp/web/IMG_6342.jpg',
+      title: 'Camp Cohort & Celebration',
+      desc: 'Celebration of cohort achievements and final project exhibitions at the summer camp closing ceremony.',
+      category: 'SUMMER CAMP',
+      date: '2024',
+      client: 'Youth Summer Camp',
+      tools: ['Cohort Celebration', 'Community Engagement']
+    }
+  ];
+
   function openLightbox(index) {
     if (!lightboxModal) return;
+    lightboxMode = 'project';
     activeLightboxIndex = (index + portfolioProjects.length) % portfolioProjects.length;
     const project = portfolioProjects[activeLightboxIndex];
 
@@ -673,6 +869,61 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = 'hidden';
   }
 
+  function renderCompetitionLightbox(idx, fallbackImg, fallbackTitle, fallbackDesc, fallbackCat, fallbackDate, fallbackClient) {
+    playUiSound(540, 'triangle', 0.1);
+    const item = competitionGalleryItems[idx] || {};
+    const img = item.img || fallbackImg;
+    const title = item.title || fallbackTitle;
+    const desc = item.desc || fallbackDesc;
+    const cat = item.category || fallbackCat || 'COMPETITION';
+    const date = item.date || fallbackDate || '2024';
+    const client = item.client || fallbackClient || 'Official Event';
+    const tools = item.tools || ['Competition Stage', 'Engineering & Speech', 'Live Presentation'];
+
+    lightboxActiveImg.src = img;
+    lightboxActiveImg.alt = title;
+    lightboxCounter.textContent = `COMPETITION ${String(idx + 1).padStart(2, '0')} / ${String(competitionGalleryItems.length).padStart(2, '0')}`;
+    lightboxProjectTitle.textContent = title;
+    lightboxDesc.textContent = desc;
+    lightboxClient.textContent = client;
+    lightboxRole.textContent = 'Participant & Competitor';
+    lightboxCategory.textContent = cat.toUpperCase();
+    lightboxDate.textContent = date;
+
+    lightboxPalette.innerHTML = ['#04098a', '#1e40af', '#38bdf8', '#fbbf24']
+      .map(c => `<span class="palette-swatch" data-hex="${c}" style="background-color:${c}; width:20px; height:20px;" title="${c}"></span>`)
+      .join('');
+
+    lightboxPalette.querySelectorAll('.palette-swatch').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        const hex = swatch.getAttribute('data-hex');
+        navigator.clipboard.writeText(hex).then(() => {
+          playUiSound(920, 'sine', 0.08);
+          showToast(`Copied palette swatch ${hex}`);
+        });
+      });
+    });
+
+    lightboxTools.innerHTML = tools.map(t => `<span>${t}</span>`).join('');
+
+    isZoomed = false;
+    lightboxActiveImg.classList.remove('zoomed');
+
+    lightboxModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  window.openCompetitionLightbox = function(imgSrc, title, desc, cat, date, client) {
+    if (!lightboxModal) return;
+    lightboxMode = 'competition';
+    let matchIdx = competitionGalleryItems.findIndex(item => item.img === imgSrc || item.img.includes(imgSrc.split('/').pop()));
+    if (matchIdx === -1) {
+      matchIdx = 0;
+    }
+    activeCompetitionIndex = matchIdx;
+    renderCompetitionLightbox(activeCompetitionIndex, imgSrc, title, desc, cat, date, client);
+  };
+
   window.openProjectLightboxById = function(id) {
     const idx = portfolioProjects.findIndex(p => p.id === id);
     if (idx !== -1) {
@@ -691,11 +942,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
   if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', () => {
     playUiSound(580, 'sine', 0.05);
-    openLightbox(activeLightboxIndex - 1);
+    if (lightboxMode === 'competition') {
+      activeCompetitionIndex = (activeCompetitionIndex - 1 + competitionGalleryItems.length) % competitionGalleryItems.length;
+      renderCompetitionLightbox(activeCompetitionIndex);
+    } else {
+      openLightbox(activeLightboxIndex - 1);
+    }
   });
   if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', () => {
     playUiSound(580, 'sine', 0.05);
-    openLightbox(activeLightboxIndex + 1);
+    if (lightboxMode === 'competition') {
+      activeCompetitionIndex = (activeCompetitionIndex + 1) % competitionGalleryItems.length;
+      renderCompetitionLightbox(activeCompetitionIndex);
+    } else {
+      openLightbox(activeLightboxIndex + 1);
+    }
   });
 
   if (lightboxZoomBtn && lightboxActiveImg) {
@@ -710,8 +971,22 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (e) => {
     if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') openLightbox(activeLightboxIndex - 1);
-    if (e.key === 'ArrowRight') openLightbox(activeLightboxIndex + 1);
+    if (e.key === 'ArrowLeft') {
+      if (lightboxMode === 'competition') {
+        activeCompetitionIndex = (activeCompetitionIndex - 1 + competitionGalleryItems.length) % competitionGalleryItems.length;
+        renderCompetitionLightbox(activeCompetitionIndex);
+      } else {
+        openLightbox(activeLightboxIndex - 1);
+      }
+    }
+    if (e.key === 'ArrowRight') {
+      if (lightboxMode === 'competition') {
+        activeCompetitionIndex = (activeCompetitionIndex + 1) % competitionGalleryItems.length;
+        renderCompetitionLightbox(activeCompetitionIndex);
+      } else {
+        openLightbox(activeLightboxIndex + 1);
+      }
+    }
     if (e.key === 'z' || e.key === 'Z') {
       isZoomed = !isZoomed;
       lightboxActiveImg.classList.toggle('zoomed', isZoomed);
