@@ -799,27 +799,27 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       img: './assets/images/summer camp/web/IMG_6209.jpg',
-      title: 'Youth Technology Summer Camp',
-      desc: 'Collaborative team workshops, outdoor challenges, and leadership activities empowering young students in technology and creative problem solving.',
-      category: 'LEADERSHIP & SUMMER CAMP',
+      title: 'Youth Technology Summer Camp Lead',
+      desc: 'Organized and led youth skill workshops, team challenges, and creative problem-solving sessions empowering student cohorts in technology.',
+      category: 'SUMMER CAMP LEAD',
       date: '2024',
-      client: 'Youth Summer Camp Program',
-      tools: ['Team Leadership', 'Mentorship', 'Youth Engagement']
+      client: 'Youth Technology Summer Camp',
+      tools: ['Team Leadership', 'Mentorship', 'Youth Engagement', 'Workshop Facilitation']
     },
     {
       img: './assets/images/summer camp/web/IMG_6213.jpg',
-      title: 'Camp Workshop Collaboration',
-      desc: 'Active team discussion and project presentation during the summer camp skill building sessions.',
-      category: 'SUMMER CAMP',
+      title: 'Workshop Mentorship & Group Collaboration',
+      desc: 'Mentoring student teams during hands-on collaborative problem solving and presentation preparation.',
+      category: 'SUMMER CAMP LEAD',
       date: '2024',
       client: 'Youth Summer Camp',
-      tools: ['Workshop Mentorship', 'Collaboration']
+      tools: ['Workshop Mentorship', 'Collaboration', 'Problem Solving']
     },
     {
       img: './assets/images/summer camp/web/IMG_6342.jpg',
-      title: 'Camp Cohort & Celebration',
-      desc: 'Celebration of cohort achievements and final project exhibitions at the summer camp closing ceremony.',
-      category: 'SUMMER CAMP',
+      title: 'Summer Camp Cohort & Celebration',
+      desc: 'Final team project exhibition and cohort celebration at the summer camp closing ceremony.',
+      category: 'SUMMER CAMP LEAD',
       date: '2024',
       client: 'Youth Summer Camp',
       tools: ['Cohort Celebration', 'Community Engagement']
