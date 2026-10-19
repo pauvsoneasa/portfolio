@@ -121,42 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Sound Toggle
-  const soundToggleBtn = document.getElementById('soundToggleBtn');
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      if (soundEnabled) {
-        playUiSound(800, 'triangle', 0.1);
-        showToast('UI Audio Feedback Enabled');
-        soundToggleBtn.style.opacity = '1';
-      } else {
-        showToast('UI Audio Feedback Muted');
-        soundToggleBtn.style.opacity = '0.5';
-      }
-    });
-  }
 
-  // Live Phnom Penh Clock (UTC+7)
-  const liveTimeTicker = document.getElementById('liveTimeTicker');
-  function updateLiveClock() {
-    if (!liveTimeTicker) return;
-    const now = new Date();
-    const options = {
-      timeZone: 'Asia/Phnom_Penh',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
-    };
-    try {
-      liveTimeTicker.textContent = new Intl.DateTimeFormat('en-GB', options).format(now);
-    } catch (e) {
-      liveTimeTicker.textContent = now.toTimeString().split(' ')[0];
-    }
-  }
-  updateLiveClock();
-  setInterval(updateLiveClock, 1000);
 
   // ---- 4. Floating Pill Navbar Interactions ----
   const navbar = document.getElementById('navbar');
@@ -1052,23 +1017,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   }
 
-  // ---- 10. Contact Form Submission Launcher ----
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      playUiSound(720, 'sine', 0.15);
-      const name = document.getElementById('formName').value;
-      const email = document.getElementById('formEmail').value;
-      const subject = document.getElementById('formSubject').value;
-      const message = document.getElementById('formMessage').value;
 
-      const mailtoUrl = `mailto:neasa232006@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
-      showToast('Opening email client...');
-      setTimeout(() => {
-        window.location.href = mailtoUrl;
-      }, 500);
-    });
-  }
 
 });
