@@ -30,68 +30,72 @@
   <!-- Slim Top Autoplay Progress Bar -->
   <div class="deck-top-progress-bar" id="topProgressBar"></div>
 
-  <!-- Floating Minimal Top Navigation Bar -->
-  <header class="deck-top-switcher">
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <a href="./index.html" class="deck-switcher-btn" title="Return to primary hybrid portfolio">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        <span>FULL WEBSITE</span>
+  <!-- Floating Minimal Top Navigation Bar (Decluttered & Streamlined HUD) -->
+  <header class="deck-top-switcher" id="deckTopSwitcher">
+    <div class="deck-nav-left">
+      <a href="./index.html" class="deck-nav-btn" title="Return to primary website">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>PORTFOLIO</span>
       </a>
-      <button class="deck-switcher-btn deck-hire-btn" id="quickContactBtn" title="Get in touch with Sok Sereyisal & Pauv Soneasa">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        <span>GET IN TOUCH</span>
+      <button class="deck-nav-btn deck-hire-accent" id="quickContactBtn" title="Get in touch with Sok Sereyisal & Pauv Soneasa">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span>CONTACT</span>
       </button>
     </div>
 
-    <div class="deck-controls-cluster">
-      <!-- Autoplay Deck Button (Active by default per Ryan's video replica) -->
-      <button class="deck-control-pill active" id="autoplayBtn" title="Autoplay slide deck (Space key)">
-        <svg id="playIcon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+    <!-- Consolidated Floating Glass HUD Capsule -->
+    <div class="deck-hud-capsule" role="toolbar" aria-label="Deck Controls">
+      <!-- Play / Pause Autoplay -->
+      <button class="hud-pill-btn active" id="autoplayBtn" title="Play / Pause Autoplay (Space key)">
+        <svg id="playIcon" width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
           <rect x="6" y="4" width="3.5" height="16" fill="currentColor"/>
           <rect x="14.5" y="4" width="3.5" height="16" fill="currentColor"/>
         </svg>
         <span id="playLabel">PAUSE</span>
       </button>
 
-      <!-- Slide Overview Filmstrip Button -->
-      <button class="deck-control-pill" id="filmstripBtn" title="Slide Filmstrip Overview (O key)">
+      <!-- Slides Filmstrip Drawer -->
+      <button class="hud-pill-btn" id="filmstripBtn" title="Slide Filmstrip Overview (O key)">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
         <span>SLIDES</span>
       </button>
 
-      <!-- Relaxing Background Music Pill -->
-      <button class="deck-control-pill active" id="musicBtn" title="Toggle relaxing background song (M key)" aria-label="Toggle background music">
-        <svg id="musicIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <span class="hud-sep"></span>
+
+      <!-- Relaxing Background Song Toggle -->
+      <button class="hud-icon-btn active" id="musicBtn" title="Background Music (M key)" aria-label="Toggle background music">
+        <svg id="musicIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 18V5l12-2v13"></path>
           <circle cx="6" cy="18" r="3"></circle>
           <circle cx="18" cy="16" r="3"></circle>
         </svg>
-        <span id="musicLabel">MUSIC ON</span>
         <span class="music-equalizer" aria-hidden="true">
           <span class="music-bar"></span>
           <span class="music-bar"></span>
           <span class="music-bar"></span>
         </span>
+        <span id="musicLabel" style="display: none;">MUSIC ON</span>
       </button>
 
-      <!-- Sound Toggle Button -->
-      <button class="deck-control-pill" id="soundBtn" title="Toggle audio SFX (S key)">
+      <!-- Sound Effects Toggle -->
+      <button class="hud-icon-btn" id="soundBtn" title="Audio SFX (S key)">
         <svg id="soundIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-        <span>SFX</span>
       </button>
 
-      <!-- Keyboard Shortcuts Helper Button -->
-      <button class="deck-control-pill" id="shortcutsBtn" title="Keyboard Shortcuts (? key)">
-        <span style="font-weight: 800; font-size: 12px; font-family: var(--font-mono);">?</span>
+      <!-- Keyboard Shortcuts Help -->
+      <button class="hud-icon-btn" id="shortcutsBtn" title="Keyboard Shortcuts (? key)">
+        <span>?</span>
       </button>
 
-      <!-- Fullscreen Button -->
-      <button class="deck-control-pill" id="fullscreenBtn" title="Toggle Fullscreen presentation (F key)">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+      <!-- Fullscreen Presentation -->
+      <button class="hud-icon-btn" id="fullscreenBtn" title="Fullscreen (F key)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
       </button>
 
-      <!-- Live Counter Pill -->
-      <div class="deck-control-pill deck-pill-counter" id="slideIndicator">SLIDE 01 / 15</div>
+      <span class="hud-sep"></span>
+
+      <!-- Live Slide Counter -->
+      <div class="hud-counter" id="slideIndicator">01 / 15</div>
     </div>
   </header>
 
@@ -205,16 +209,8 @@
     </div>
 
     <div class="h-white-band">
-      <div class="contact-pills" style="position: absolute; left: 6vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
-      </div>
-
       <h2 class="h-slide-title">Commercial &amp; Brand Campaigns</h2>
       <p class="h-slide-sub">Art Direction &middot; Brand Identity &middot; Packaging &middot; 2024 &ndash; 2026</p>
-
-      <div class="contact-pills" style="position: absolute; right: 8vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
-      </div>
     </div>
 
     <a href="#slide-4" class="slide-arrow-btn" aria-label="Next Slide">
@@ -227,16 +223,8 @@
        =================================================================== -->
   <section class="slide-section slide-h-top-white" id="slide-4">
     <div class="h-white-band" style="height: 35%;">
-      <div class="contact-pills" style="position: absolute; left: 6vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
-      </div>
-
       <h2 class="h-slide-title">Product Photography &amp; Billboards</h2>
       <p class="h-slide-sub">Culinary, Retail &amp; Real Estate Collateral &middot; 2024 &ndash; 2026</p>
-
-      <div class="contact-pills" style="position: absolute; right: 8vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
-      </div>
 
       <a href="#slide-5" class="slide-arrow-btn arrow-top-right" aria-label="Next Slide">
         <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -270,16 +258,8 @@
        =================================================================== -->
   <section class="slide-section slide-h-top-white" id="slide-5">
     <div class="h-white-band" style="height: 35%;">
-      <div class="contact-pills" style="position: absolute; left: 6vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
-      </div>
-
       <h2 class="h-slide-title">Competitions &amp; Events</h2>
       <p class="h-slide-sub">Robotics &middot; WorldSkills &middot; Oratory &middot; 2023 &ndash; 2026</p>
-
-      <div class="contact-pills" style="position: absolute; right: 8vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
-      </div>
 
       <a href="#slide-6" class="slide-arrow-btn arrow-top-right" aria-label="Next Slide">
         <svg viewBox="0 0 24 24" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -395,16 +375,8 @@
     </div>
 
     <div class="h-white-band" style="height: 35%;">
-      <div class="contact-pills" style="position: absolute; left: 6vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
-      </div>
-
       <h2 class="h-slide-title">Creative Artworks</h2>
       <p class="h-slide-sub">Digital Raster &middot; Vector Media &middot; 2023 &ndash; 2026</p>
-
-      <div class="contact-pills" style="position: absolute; right: 8vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
-      </div>
     </div>
 
     <a href="#slide-8" class="slide-arrow-btn" aria-label="Next Slide">
@@ -504,16 +476,8 @@
     </div>
 
     <div class="h-white-band" style="height: 35%;">
-      <div class="contact-pills" style="position: absolute; left: 6vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>+855 092 435 513</span>
-      </div>
-
       <h2 class="h-slide-title">Brand Identity &amp; Logos</h2>
       <p class="h-slide-sub">Vector Marks &middot; Typography &middot; Year 2025 &ndash; 2026</p>
-
-      <div class="contact-pills" style="position: absolute; right: 8vw;">
-        <span class="c-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>pauv_soneasa</span>
-      </div>
     </div>
 
     <a href="#slide-11" class="slide-arrow-btn" aria-label="Next Slide">

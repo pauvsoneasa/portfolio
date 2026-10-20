@@ -271,14 +271,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Jump to Slide by Index
+  // Jump to Slide by Index (Exact Slide-to-Screen Top Alignment)
   function jumpToSlide(idx) {
     if (idx < 0) idx = 0;
     if (idx >= totalSlides) idx = totalSlides - 1;
     const target = slides[idx];
     if (target) {
       playBeep(560 + (idx * 16), 'triangle', 0.08);
-      target.scrollIntoView({ behavior: 'smooth' });
+
+      // Exact pixel alignment to guarantee slide fills 100% of viewport without cutting
+      const targetTop = target.offsetTop;
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'smooth'
+      });
 
       // Refresh entrance animations
       slides.forEach(s => s.classList.remove('is-visible'));
@@ -393,12 +399,57 @@ document.addEventListener('DOMContentLoaded', () => {
     handleUserActivity();
   }
 
-  // Wheel Scroll Listener
+  // True Slide-by-Slide Wheel Navigation (Prevents in-between half-slide states)
+  let isWheelThrottled = false;
   window.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaY) > 2 || Math.abs(e.deltaX) > 2) {
-      handleUserManualScroll();
+    // If user is inside an open lightbox, contact modal, shortcuts modal, or filmstrip, permit local scrolling
+    if ((lightbox && lightbox.classList.contains('active')) ||
+        (contactModal && contactModal.classList.contains('active')) ||
+        (shortcutsModal && shortcutsModal.classList.contains('active')) ||
+        (filmstripDrawer && filmstripDrawer.classList.contains('active'))) {
+      return;
     }
-  }, { passive: true });
+
+    e.preventDefault(); // Stop arbitrary pixel drift between slides
+    handleUserManualScroll();
+
+    if (isWheelThrottled) return;
+
+    if (Math.abs(e.deltaY) > 8 || Math.abs(e.deltaX) > 8) {
+      isWheelThrottled = true;
+      if (e.deltaY > 0 || e.deltaX > 0) {
+        jumpToSlide(currentSlideIndex + 1);
+      } else {
+        jumpToSlide(currentSlideIndex - 1);
+      }
+      setTimeout(() => {
+        isWheelThrottled = false;
+      }, 520); // 520ms throttle: 1 deliberate wheel motion = exactly 1 full slide transition
+    }
+  }, { passive: false });
+
+  // Auto-Dimming Top HUD on Idle (Ensures 100% Immersive Full-Screen Deck View)
+  const deckTopSwitcher = document.getElementById('deckTopSwitcher');
+  let navDimTimer = null;
+  function resetNavDimming() {
+    if (!deckTopSwitcher) return;
+    deckTopSwitcher.classList.remove('is-dimmed');
+    clearTimeout(navDimTimer);
+    navDimTimer = setTimeout(() => {
+      const hasOpenModal = (lightbox && lightbox.classList.contains('active')) ||
+                           (contactModal && contactModal.classList.contains('active')) ||
+                           (shortcutsModal && shortcutsModal.classList.contains('active')) ||
+                           (filmstripDrawer && filmstripDrawer.classList.contains('active'));
+      if (!hasOpenModal) {
+        deckTopSwitcher.classList.add('is-dimmed');
+      }
+    }, 3200);
+  }
+
+  ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, resetNavDimming, { passive: true });
+  });
+  resetNavDimming();
 
   // Touch Swipe & Scroll Listeners
   window.addEventListener('touchmove', () => {
