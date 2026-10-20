@@ -36,6 +36,50 @@ document.addEventListener('DOMContentLoaded', () => {
   const deckToast = document.getElementById('deckToast');
   const bgAudio = document.getElementById('deckBgAudio');
 
+  // Filmstrip & Drawer DOM Elements
+  const filmstripDrawer = document.getElementById('deckFilmstripDrawer');
+  const filmstripTrack = document.getElementById('filmstripTrack');
+  const filmstripBtn = document.getElementById('filmstripBtn');
+  const filmstripCloseBtn = document.getElementById('filmstripCloseBtn');
+  let filmstripItems = [];
+
+  // Contact Modal DOM Elements
+  const quickContactBtn = document.getElementById('quickContactBtn');
+  const contactModal = document.getElementById('deckContactModal');
+  const contactCloseBtn = document.getElementById('contactCloseBtn');
+  const contactModalOverlay = document.getElementById('contactModalOverlay');
+  const copyEmailRow = document.getElementById('copyEmailRow');
+  const copyEmailTag = document.getElementById('copyEmailTag');
+
+  // Keyboard Shortcuts Modal DOM Elements
+  const shortcutsBtn = document.getElementById('shortcutsBtn');
+  const shortcutsModal = document.getElementById('deckShortcutsModal');
+  const shortcutsCloseBtn = document.getElementById('shortcutsCloseBtn');
+  const shortcutsModalOverlay = document.getElementById('shortcutsModalOverlay');
+
+  // Smart Hover-Pause Engine State
+  let isHoverPaused = false;
+  let hoverPauseRemaining = SLIDE_DURATION;
+
+  // 15 Presentation Slides Metadata for Figma/Keynote Filmstrip Tray
+  const filmstripData = [
+    { num: 1, title: 'MY PORT-FOLIO 2026', cat: 'TITLE', thumb: './assets/profile/pauv_presenter_cutout.png' },
+    { num: 2, title: 'About Pauv Soneasa', cat: 'BIO & LEADERSHIP', thumb: './assets/profile/pauv_standing_bw.png' },
+    { num: 3, title: 'Commercial Campaigns', cat: 'CAMPAIGN', thumb: './assets/images/my-artwork/thumbs/cheese_corn_portrait_01.jpg' },
+    { num: 4, title: 'Product Photography', cat: 'PHOTO & RETOUCH', thumb: './assets/images/my-artwork/thumbs/cheese_corn_landscape_01.jpg' },
+    { num: 5, title: 'Competitions & Honors', cat: 'AWARDS & STEM', thumb: './assets/images/competitions/thumbs/robotic_img_7829.jpg' },
+    { num: 6, title: 'Video Production & Lab', cat: 'CINEMA & EDIT', thumb: './assets/video/classroom_management_thumb.jpg' },
+    { num: 7, title: 'Creative Artworks', cat: 'KEY VISUALS', thumb: './assets/images/my-artwork/thumbs/green_matcha_story.jpg' },
+    { num: 8, title: 'Social Feeds & Grid', cat: 'SOCIAL DESIGN', thumb: './assets/images/my-artwork/thumbs/beverage_social_01.jpg' },
+    { num: 9, title: 'Stories & Motion Ads', cat: 'VERTICAL MEDIA', thumb: './assets/images/my-artwork/thumbs/matcha_promo_banner.jpg' },
+    { num: 10, title: 'Identity & Typography', cat: 'BRANDING', thumb: './assets/images/my-artwork/thumbs/logo_frame_station.jpg' },
+    { num: 11, title: 'Brochure & Editorial', cat: 'WORLDSKILLS', thumb: './assets/images/worldskills/thumbs/wsa_m2_editorial_spread.jpg' },
+    { num: 12, title: 'Vector Illustration', cat: 'CHARACTER ART', thumb: './assets/images/my-artwork/thumbs/vector_character_01.jpg' },
+    { num: 13, title: 'Packaging Design', cat: 'WORLDSKILLS', thumb: './assets/images/worldskills/thumbs/wsa_m3_box_mockup.jpg' },
+    { num: 14, title: 'Applied Brand Mockups', cat: 'WORLDSKILLS', thumb: './assets/images/worldskills/thumbs/wsa_m3_applied_mockup.jpg' },
+    { num: 15, title: "Let's Connect & Hire", cat: 'COLLABORATION', thumb: './assets/profile/pauv_presenter_cutout.png' }
+  ];
+
   // Lightbox DOM Elements
   const lightbox = document.getElementById('deckLightbox');
   const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
@@ -216,6 +260,15 @@ document.addEventListener('DOMContentLoaded', () => {
     dotButtons.forEach((dot, idx) => {
       dot.classList.toggle('active', idx === index);
     });
+
+    // Sync filmstrip items active highlighter
+    filmstripItems.forEach((item, idx) => {
+      const isActive = idx === index;
+      item.classList.toggle('active', isActive);
+      if (isActive && filmstripDrawer && filmstripDrawer.classList.contains('active')) {
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    });
   }
 
   // Jump to Slide by Index
@@ -237,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Progress Bar Animation Loop
   function updateProgressLoop() {
-    if (!isAutoplaying) return;
+    if (!isAutoplaying || isHoverPaused) return;
     const now = performance.now();
     const elapsed = now - slideStartTime;
     const slideFraction = Math.min(1, elapsed / SLIDE_DURATION);
@@ -255,6 +308,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     progressRaf = requestAnimationFrame(updateProgressLoop);
+  }
+
+  // Smart Hover-Pause Engine
+  function setHoverPause(paused) {
+    if (!isAutoplaying) return;
+    if (paused && !isHoverPaused) {
+      isHoverPaused = true;
+      const elapsed = performance.now() - slideStartTime;
+      hoverPauseRemaining = Math.max(600, SLIDE_DURATION - elapsed);
+      cancelAnimationFrame(progressRaf);
+      showToast('PAUSED • HOVERING', 1200);
+    } else if (!paused && isHoverPaused) {
+      isHoverPaused = false;
+      slideStartTime = performance.now() - (SLIDE_DURATION - hoverPauseRemaining);
+      cancelAnimationFrame(progressRaf);
+      progressRaf = requestAnimationFrame(updateProgressLoop);
+    }
   }
 
   // Start Autoplay Engine
@@ -396,8 +466,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Keyboard Shortcuts
   window.addEventListener('keydown', (e) => {
-    if (lightbox && lightbox.classList.contains('active')) {
-      if (e.key === 'Escape') closeLightbox();
+    // Escape closes any open dialog, modal, or drawer
+    if (e.key === 'Escape') {
+      if (lightbox && lightbox.classList.contains('active')) {
+        closeLightbox();
+        return;
+      }
+      if (contactModal && contactModal.classList.contains('active')) {
+        closeContactModal();
+        return;
+      }
+      if (shortcutsModal && shortcutsModal.classList.contains('active')) {
+        toggleShortcutsModal(false);
+        return;
+      }
+      if (filmstripDrawer && filmstripDrawer.classList.contains('active')) {
+        toggleFilmstrip(false);
+        return;
+      }
+    }
+
+    // Toggle Filmstrip Overview (O key)
+    if (e.key === 'o' || e.key === 'O') {
+      e.preventDefault();
+      toggleFilmstrip();
+      return;
+    }
+
+    // Toggle Shortcuts Helper Dialog (? key or H key)
+    if (e.key === '?' || (e.shiftKey && e.key === '/') || e.key === 'h' || e.key === 'H') {
+      e.preventDefault();
+      toggleShortcutsModal();
+      return;
+    }
+
+    // If any modal is actively displayed, ignore slide stepping keys
+    if ((lightbox && lightbox.classList.contains('active')) ||
+        (contactModal && contactModal.classList.contains('active')) ||
+        (shortcutsModal && shortcutsModal.classList.contains('active'))) {
       return;
     }
 
@@ -567,6 +673,195 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
   if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+
+  // ===================================================================
+  // 1. FIGMA / APPLE KEYNOTE 15-SLIDE FILMSTRIP TRAY ENGINE
+  // ===================================================================
+  function initFilmstrip() {
+    if (!filmstripTrack) return;
+    filmstripTrack.innerHTML = '';
+    filmstripItems = [];
+
+    filmstripData.forEach((item, idx) => {
+      const el = document.createElement('div');
+      el.className = `filmstrip-item ${idx === currentSlideIndex ? 'active' : ''}`;
+      el.setAttribute('data-index', idx);
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `Slide ${item.num}: ${item.title}`);
+      el.innerHTML = `
+        <span class="filmstrip-item-num">${String(item.num).padStart(2, '0')}</span>
+        <img src="${item.thumb}" alt="${item.title}" loading="lazy">
+        <span class="filmstrip-item-title">${item.title}</span>
+      `;
+
+      el.addEventListener('click', () => {
+        handleUserManualScroll();
+        jumpToSlide(idx);
+        playBeep(640, 'triangle', 0.08);
+      });
+
+      // Keyboard enter/space navigation inside filmstrip
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleUserManualScroll();
+          jumpToSlide(idx);
+          playBeep(640, 'triangle', 0.08);
+        }
+      });
+
+      filmstripTrack.appendChild(el);
+      filmstripItems.push(el);
+    });
+  }
+
+  function toggleFilmstrip(open) {
+    if (!filmstripDrawer) return;
+    const shouldOpen = open !== undefined ? open : !filmstripDrawer.classList.contains('active');
+    filmstripDrawer.classList.toggle('active', shouldOpen);
+    filmstripDrawer.setAttribute('aria-hidden', (!shouldOpen).toString());
+    if (filmstripBtn) {
+      filmstripBtn.classList.toggle('active', shouldOpen);
+    }
+    if (shouldOpen) {
+      playBeep(780, 'sine', 0.08);
+      setTimeout(() => {
+        const activeItem = filmstripItems[currentSlideIndex];
+        if (activeItem) {
+          activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }, 50);
+    } else {
+      playBeep(480, 'sine', 0.06);
+    }
+  }
+
+  if (filmstripBtn) {
+    filmstripBtn.addEventListener('click', () => toggleFilmstrip());
+  }
+  if (filmstripCloseBtn) {
+    filmstripCloseBtn.addEventListener('click', () => toggleFilmstrip(false));
+  }
+
+  // ===================================================================
+  // 2. QUICK GET IN TOUCH / HIRE MODAL ENGINE
+  // ===================================================================
+  function openContactModal() {
+    if (!contactModal) return;
+    pauseAutoplay('PAUSED FOR CONTACT');
+    contactModal.classList.add('active');
+    contactModal.setAttribute('aria-hidden', 'false');
+    playBeep(740, 'sine', 0.08);
+  }
+
+  function closeContactModal() {
+    if (!contactModal) return;
+    contactModal.classList.remove('active');
+    contactModal.setAttribute('aria-hidden', 'true');
+    playBeep(460, 'sine', 0.06);
+    scheduleInactivityResume();
+  }
+
+  if (quickContactBtn) quickContactBtn.addEventListener('click', openContactModal);
+  if (contactCloseBtn) contactCloseBtn.addEventListener('click', closeContactModal);
+  if (contactModalOverlay) contactModalOverlay.addEventListener('click', closeContactModal);
+
+  if (copyEmailRow && copyEmailTag) {
+    copyEmailRow.addEventListener('click', () => {
+      const email = 'neasa232006@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        playBeep(960, 'triangle', 0.1);
+        copyEmailTag.textContent = 'COPIED! ✓';
+        copyEmailTag.style.background = '#22c55e';
+        copyEmailTag.style.color = '#ffffff';
+        showToast('Email copied: ' + email);
+        setTimeout(() => {
+          copyEmailTag.textContent = 'COPY';
+          copyEmailTag.style.background = '';
+          copyEmailTag.style.color = '';
+        }, 2200);
+      }).catch(() => {
+        showToast('Email: neasa232006@gmail.com');
+      });
+    });
+  }
+
+  // ===================================================================
+  // 3. KEYBOARD SHORTCUTS HELPER MODAL
+  // ===================================================================
+  function toggleShortcutsModal(open) {
+    if (!shortcutsModal) return;
+    const shouldOpen = open !== undefined ? open : !shortcutsModal.classList.contains('active');
+    shortcutsModal.classList.toggle('active', shouldOpen);
+    shortcutsModal.setAttribute('aria-hidden', (!shouldOpen).toString());
+    if (shouldOpen) {
+      pauseAutoplay('PAUSED • SHORTCUTS');
+      playBeep(720, 'sine', 0.08);
+    } else {
+      playBeep(460, 'sine', 0.06);
+      scheduleInactivityResume();
+    }
+  }
+
+  if (shortcutsBtn) shortcutsBtn.addEventListener('click', () => toggleShortcutsModal());
+  if (shortcutsCloseBtn) shortcutsCloseBtn.addEventListener('click', () => toggleShortcutsModal(false));
+  if (shortcutsModalOverlay) shortcutsModalOverlay.addEventListener('click', () => toggleShortcutsModal(false));
+
+  // ===================================================================
+  // 4. 3D CURSOR PARALLAX & SPECULAR SHEEN ENGINE
+  // ===================================================================
+  function initCardParallaxAndSheen() {
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!canHover) return;
+
+    const cards = document.querySelectorAll('.card-frame');
+    cards.forEach(card => {
+      if (!card.querySelector('.card-sheen')) {
+        const sheen = document.createElement('div');
+        sheen.className = 'card-sheen';
+        card.appendChild(sheen);
+      }
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY = ((x - centerX) / centerX) * 4.5;
+        const rotateX = -((y - centerY) / centerY) * 4.5;
+
+        const pctX = ((x / rect.width) * 100).toFixed(1);
+        const pctY = ((y / rect.height) * 100).toFixed(1);
+
+        card.style.transform = `perspective(700px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(8px)`;
+        card.style.setProperty('--mouse-x', `${pctX}%`);
+        card.style.setProperty('--mouse-y', `${pctY}%`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // ===================================================================
+  // 5. SMART HOVER-PAUSE LISTENER ATTACHMENT
+  // ===================================================================
+  function initSmartHoverPause() {
+    const hoverTargets = document.querySelectorAll('.card-frame, .video-card-frame, .v-white-pane, .about-text-wrap, .wsa-editorial-card');
+    hoverTargets.forEach(target => {
+      target.addEventListener('mouseenter', () => setHoverPause(true));
+      target.addEventListener('mouseleave', () => setHoverPause(false));
+    });
+  }
+
+  // Initialize all interactive presentation features
+  initFilmstrip();
+  initCardParallaxAndSheen();
+  initSmartHoverPause();
 
   // Initial State: Start autoplay immediately by default!
   jumpToSlide(0);

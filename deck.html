@@ -32,19 +32,31 @@
 
   <!-- Floating Minimal Top Navigation Bar -->
   <header class="deck-top-switcher">
-    <a href="./index.html" class="deck-switcher-btn" title="Return to primary hybrid portfolio">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      <span>FULL WEBSITE</span>
-    </a>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="./index.html" class="deck-switcher-btn" title="Return to primary hybrid portfolio">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>FULL WEBSITE</span>
+      </a>
+      <button class="deck-switcher-btn deck-hire-btn" id="quickContactBtn" title="Get in touch with Sok Sereyisal & Pauv Soneasa">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span>GET IN TOUCH</span>
+      </button>
+    </div>
 
     <div class="deck-controls-cluster">
       <!-- Autoplay Deck Button (Active by default per Ryan's video replica) -->
-      <button class="deck-control-pill active" id="autoplayBtn" title="Autoplay slide deck (TikTok style)">
+      <button class="deck-control-pill active" id="autoplayBtn" title="Autoplay slide deck (Space key)">
         <svg id="playIcon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
           <rect x="6" y="4" width="3.5" height="16" fill="currentColor"/>
           <rect x="14.5" y="4" width="3.5" height="16" fill="currentColor"/>
         </svg>
         <span id="playLabel">PAUSE</span>
+      </button>
+
+      <!-- Slide Overview Filmstrip Button -->
+      <button class="deck-control-pill" id="filmstripBtn" title="Slide Filmstrip Overview (O key)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>SLIDES</span>
       </button>
 
       <!-- Relaxing Background Music Pill -->
@@ -63,13 +75,18 @@
       </button>
 
       <!-- Sound Toggle Button -->
-      <button class="deck-control-pill" id="soundBtn" title="Toggle audio SFX">
+      <button class="deck-control-pill" id="soundBtn" title="Toggle audio SFX (S key)">
         <svg id="soundIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
         <span>SFX</span>
       </button>
 
+      <!-- Keyboard Shortcuts Helper Button -->
+      <button class="deck-control-pill" id="shortcutsBtn" title="Keyboard Shortcuts (? key)">
+        <span style="font-weight: 800; font-size: 12px; font-family: var(--font-mono);">?</span>
+      </button>
+
       <!-- Fullscreen Button -->
-      <button class="deck-control-pill" id="fullscreenBtn" title="Toggle Fullscreen presentation">
+      <button class="deck-control-pill" id="fullscreenBtn" title="Toggle Fullscreen presentation (F key)">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
       </button>
 
@@ -327,6 +344,15 @@
 
     <div class="v-red-pane" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;">
       <div style="width: 100%; max-width: 480px; background: rgba(255,255,255,0.08); padding: 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(10px); box-shadow: 0 24px 60px rgba(0,0,0,0.35);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span style="background: rgba(255,255,255,0.18); color: #fff; font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            01:16 &bull; 1080p HD
+          </span>
+          <span style="background: rgba(255,255,255,0.18); color: #fff; font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px;">
+            DIRECTED &amp; EDITED BY SOK SEREYISAL
+          </span>
+        </div>
         <video controls playsinline preload="metadata" poster="./assets/video/classroom_management_thumb.jpg" style="width: 100%; aspect-ratio: 16/9; border-radius: 12px; display: block; background: #000; box-shadow: 0 8px 25px rgba(0,0,0,0.45); outline: none;">
           <source src="./assets/video/classroom_management_project.mp4" type="video/mp4">
           Your browser does not support the video tag.
@@ -708,6 +734,101 @@
           <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #666; margin-bottom: 6px;">BRAND COLOR PALETTE:</div>
           <div class="lightbox-palette-strip" id="lightboxPalette"></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       FIGMA / APPLE KEYNOTE SLIDE FILMSTRIP TRAY (15 SLIDES)
+       =================================================================== -->
+  <aside class="deck-filmstrip-drawer" id="deckFilmstripDrawer" aria-hidden="true" role="dialog" aria-label="Slide Filmstrip Overview">
+    <div class="filmstrip-header">
+      <div class="filmstrip-title-row">
+        <span class="filmstrip-badge">OVERVIEW</span>
+        <h4 class="filmstrip-title">15 Interactive Presentation Slides</h4>
+        <span class="filmstrip-hint">Click any slide to jump &bull; Press [O] to toggle</span>
+      </div>
+      <button class="filmstrip-close-btn" id="filmstripCloseBtn" aria-label="Close Filmstrip">&times;</button>
+    </div>
+    <div class="filmstrip-track" id="filmstripTrack">
+      <!-- 15 Thumbnails populated dynamically in deck.js -->
+    </div>
+  </aside>
+
+  <!-- ===================================================================
+       QUICK CONTACT / HIRE MODAL (INSTANT REACH)
+       =================================================================== -->
+  <div class="deck-modal-wrap" id="deckContactModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="contactModalOverlay"></div>
+    <div class="modal-card">
+      <button class="modal-close-btn" id="contactCloseBtn" aria-label="Close Dialog">&times;</button>
+      <div class="modal-top">
+        <span class="modal-tag">GET IN TOUCH</span>
+        <h3 class="modal-title">Let's Build Something Exceptional</h3>
+        <p class="modal-sub">Available for Brand Identity, Video Production, Packaging &amp; Digital Advertising.</p>
+      </div>
+
+      <div class="modal-contact-links">
+        <a href="https://t.me/soneasa_cmd" target="_blank" rel="noopener" class="modal-contact-item">
+          <div class="m-icon telegram-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </div>
+          <div class="m-info">
+            <div class="m-label">Telegram Direct</div>
+            <div class="m-val">@soneasa_cmd</div>
+          </div>
+          <span class="m-arrow">➔</span>
+        </a>
+
+        <a href="tel:+85592435513" class="modal-contact-item">
+          <div class="m-icon phone-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div class="m-info">
+            <div class="m-label">Phone &amp; Mobile</div>
+            <div class="m-val">+855 092 435 513</div>
+          </div>
+          <span class="m-arrow">➔</span>
+        </a>
+
+        <div class="modal-contact-item" id="copyEmailRow" style="cursor: pointer;">
+          <div class="m-icon email-bg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div class="m-info">
+            <div class="m-label">Official Email (Click to Copy)</div>
+            <div class="m-val" id="contactEmailVal">neasa232006@gmail.com</div>
+          </div>
+          <span class="m-copy-tag" id="copyEmailTag">COPY</span>
+        </div>
+      </div>
+
+      <div class="modal-footer-credit">
+        Designed &amp; Engineered by <strong>Sok Sereyisal</strong> &bull; Phnom Penh, Cambodia
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       KEYBOARD SHORTCUTS CHEAT SHEET MODAL
+       =================================================================== -->
+  <div class="deck-modal-wrap" id="deckShortcutsModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="shortcutsModalOverlay"></div>
+    <div class="modal-card modal-card-sm">
+      <button class="modal-close-btn" id="shortcutsCloseBtn" aria-label="Close Dialog">&times;</button>
+      <div class="modal-top">
+        <span class="modal-tag">POWER USER CONTROLS</span>
+        <h3 class="modal-title">Keyboard Shortcuts</h3>
+      </div>
+      <div class="shortcuts-grid">
+        <div class="shortcut-row"><kbd>Space</kbd><span>Pause / Resume Autoplay</span></div>
+        <div class="shortcut-row"><kbd>&larr;</kbd> <kbd>&rarr;</kbd><span>Previous / Next Slide</span></div>
+        <div class="shortcut-row"><kbd>O</kbd><span>Slide Filmstrip Overview</span></div>
+        <div class="shortcut-row"><kbd>F</kbd><span>Toggle Fullscreen Presentation</span></div>
+        <div class="shortcut-row"><kbd>M</kbd><span>Toggle Background Song</span></div>
+        <div class="shortcut-row"><kbd>S</kbd><span>Toggle Audio Sound Effects</span></div>
+        <div class="shortcut-row"><kbd>Esc</kbd><span>Close Lightbox / Modal</span></div>
+        <div class="shortcut-row"><kbd>Hover</kbd><span>Smart-pauses while reading content</span></div>
       </div>
     </div>
   </div>

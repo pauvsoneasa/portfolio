@@ -1393,3 +1393,431 @@ body {
     height: 36px;
   }
 }
+
+/* ===================================================================
+   NEW UI POLISH: QUICK HIRE CTA, SPECULAR SHEEN & SLIDE FILMSTRIP
+   =================================================================== */
+
+.deck-hire-btn {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4);
+}
+
+.deck-hire-btn:hover {
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Specular Light Sheen for Tactile 3D Cards */
+.card-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle 140px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.42), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  mix-blend-mode: overlay;
+  z-index: 6;
+}
+
+.card-frame:hover .card-sheen {
+  opacity: 1;
+}
+
+/* Slide Filmstrip Drawer */
+.deck-filmstrip-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  background: rgba(10, 14, 28, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+  transform: translateY(100%);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 16px 24px 20px;
+}
+
+.deck-filmstrip-drawer.active {
+  transform: translateY(0);
+}
+
+.filmstrip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.filmstrip-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filmstrip-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  background: #38bdf8;
+  color: #0b1026;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+}
+
+.filmstrip-title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.filmstrip-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.filmstrip-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.filmstrip-close-btn:hover {
+  background: var(--red);
+}
+
+.filmstrip-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 6px 2px 10px;
+}
+
+.filmstrip-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.filmstrip-track::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.filmstrip-track::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.filmstrip-item {
+  flex: 0 0 148px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.filmstrip-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+  transition: opacity 0.2s, transform 0.3s;
+}
+
+.filmstrip-item:hover img {
+  opacity: 0.9;
+  transform: scale(1.08);
+}
+
+.filmstrip-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.filmstrip-item.active {
+  border-color: #38bdf8;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+  transform: translateY(-4px) scale(1.04);
+}
+
+.filmstrip-item.active img {
+  opacity: 1;
+}
+
+.filmstrip-item-num {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+.filmstrip-item-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Modals System */
+.deck-modal-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 10006;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.deck-modal-wrap.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 10, 20, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.modal-card {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.4), 0 0 1px rgba(0, 0, 0, 0.15);
+  transform: scale(0.92) translateY(12px);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.deck-modal-wrap.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-card-sm {
+  max-width: 420px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  color: #111111;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: var(--red);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.modal-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modal-title {
+  font-family: var(--font-anton);
+  font-size: 26px;
+  color: #0f172a;
+  margin: 6px 0 8px;
+  letter-spacing: 0.02em;
+}
+
+.modal-sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748b;
+  margin-bottom: 22px;
+}
+
+.modal-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f8fafc;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s var(--ease);
+}
+
+.modal-contact-item:hover {
+  background: #ffffff;
+  border-color: var(--red);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.m-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.telegram-bg { background: #0088cc; }
+.phone-bg { background: #059669; }
+.email-bg { background: #0284c7; }
+
+.m-info {
+  flex: 1;
+}
+
+.m-label {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.m-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.m-arrow {
+  color: #94a3b8;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+
+.modal-contact-item:hover .m-arrow {
+  color: var(--red);
+  transform: translateX(3px);
+}
+
+.m-copy-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.modal-contact-item:hover .m-copy-tag {
+  background: var(--red);
+  color: #ffffff;
+}
+
+.modal-footer-credit {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: 11.5px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.shortcuts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: #334155;
+}
+
+.shortcut-row kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-bottom: 2px solid #94a3b8;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
