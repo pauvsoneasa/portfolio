@@ -225,24 +225,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const editorialSlides = [
     {
       category: "Campaigns & Packaging",
-      title: "Commercial Campaign & Packaging",
-      client: "Cheese Corn Cambodia & Modern Matcha",
+      title: "Cheese Corn Cambodia Commercial Campaign",
+      client: "Cheese Corn Cambodia & Salford & Co.",
       year: "Year 2024 – 2026",
-      desc: "High-energy commercial snack packaging and promotional poster campaign designed with bold typography, savory cheese corn product staging, and vibrant color psychology.",
+      desc: "High-energy commercial snack packaging and promotional campaign featuring bold typography, savory cheese corn product staging, and vibrant color psychology.",
       bullets: [
         "Portrait Campaign Posters & Billboards",
-        "Commercial Snack Packaging Headers",
+        "Snack Packaging Headers & POS Badges",
         "Retail Storefront & Social Feed Creatives"
       ],
       img1: "assets/images/my-artwork/thumbs/cheese_corn_portrait_01.jpg",
-      caption1: "Commercial Campaign",
-      img2: "assets/images/my-artwork/thumbs/matcha_drink_poster.jpg",
-      caption2: "Beverage Poster",
+      caption1: "Portrait Campaign",
+      img2: "assets/images/my-artwork/thumbs/green_matcha_story.jpg",
+      caption2: "Matcha Just Dropped",
       projectId: 1
     },
     {
+      category: "Video & Educational Media",
+      title: "Happy Chandara School Educational Video Production",
+      client: "Happy Chandara School (Toutes à l'école)",
+      year: "Year 2025 – 2026",
+      desc: "Educational video documentary filmed on location at Happy Chandara School with ICT supervisor Mr. Chhorn Ieng on classroom management methodologies, wireless lavalier audio recording, and bilingual Khmer subtitles.",
+      bullets: [
+        "On-Location Classroom Documentary",
+        "Khmer Closed Captioning & Typographic Timing",
+        "Wireless Audio Mastering & Broadcast Color Grading"
+      ],
+      img1: "assets/video/classroom_management_thumb.jpg",
+      caption1: "Classroom Video",
+      img2: "assets/images/my-artwork/thumbs/certificate_excellence.jpg",
+      caption2: "Summer Camp 2026 Certificate",
+      projectId: 3
+    },
+    {
       category: "Brand Identity & Logos",
-      title: "Design Logo & Brand",
+      title: "Design Logo & Brand System",
       client: "Frame Station Creative Studio & Organic Cosmetics",
       year: "Year 2024 – 2026",
       desc: "Precision geometric logo systems, botanical identity marks, negative space construction, and complete corporate stationery standards.",
@@ -255,58 +272,41 @@ document.addEventListener('DOMContentLoaded', () => {
       caption1: "Geometric Mark",
       img2: "assets/images/my-artwork/thumbs/logo_organic_cosmetics.jpg",
       caption2: "Botanical Logo",
-      projectId: 6
+      projectId: 10
     },
     {
-      category: "Ceremony & Institutional Print",
-      title: "Ceremony & Editorial Print",
-      client: "Happy Chandara Academic Council & FABLAB STEM",
+      category: "Institutional Signage & Prepress",
+      title: "Institutional Signage & Prepress",
+      client: "La Fondation Dassault Systèmes, L'Oréal Foundation & Toutes à l'école",
       year: "Year 2024 – 2026",
-      desc: "Prepress-ready commemorative ceremony suites, 4-panel milestone graduation graphics, academic event programs, and bilingual technical STEM posters.",
+      desc: "Architectural Fablab dedication plaques, L'Oréal Foundation donor acknowledgements, and large-format Marie Stopes debate championship stage banners.",
       bullets: [
-        "4-Panel Milestone Graduation Posters",
-        "Commemorative Programs & Stage Backdrops",
-        "Prepress CMYK Print Separation"
+        "Fablab Architectural Plaque (30x20cm)",
+        "L'Oréal Foundation Donor Recognition",
+        "Public Debate Championship Stage Visual"
       ],
-      img1: "assets/images/my-artwork/thumbs/graduation_ceremony_01.jpg",
-      caption1: "Graduation Suite",
-      img2: "assets/images/my-artwork/thumbs/fablab_stem_poster.jpg",
-      caption2: "STEM Innovation Poster",
-      projectId: 8
+      img1: "assets/images/my-artwork/thumbs/fablab_stem_poster.jpg",
+      caption1: "Fablab Plaque",
+      img2: "assets/images/my-artwork/thumbs/debate_competition_poster.jpg",
+      caption2: "Debate Championship",
+      projectId: 15
     },
     {
-      category: "Culinary & Digital Advertising",
-      title: "Culinary & Digital Advertising",
-      client: "Asian Food Fair & Cafe Beverage Series",
+      category: "3D Coffee Staging & Real Estate",
+      title: "3D Product Staging & Real Estate Collateral",
+      client: "Café Storia & Fauget Real Estate",
       year: "Year 2024 – 2026",
-      desc: "Mouth-watering culinary advertising, widescreen digital billboard banners, espresso beverage posters, and high-engagement social promotion.",
+      desc: "3D takeaway coffee cup product staging against scenic mountain landscapes, morning breakfast promotion banners, and modern architectural property flyers.",
       bullets: [
-        "Landscape Digital Billboard Displays",
-        "Culinary Lighting & Food Poster Layouts",
-        "High-Engagement Cafe Promotion Creatives"
+        "Café Storia 3D Takeaway Cup Staging",
+        "Artisan Coffee Sunrise Promotion",
+        "Fauget Real Estate Sales Flyer"
       ],
-      img1: "assets/images/my-artwork/thumbs/cheese_corn_landscape_01.jpg",
-      caption1: "Digital Billboard",
-      img2: "assets/images/my-artwork/thumbs/coffee_milk_poster.jpg",
-      caption2: "Coffee Milk Poster",
-      projectId: 2
-    },
-    {
-      category: "Vector Art & Apparel Merch",
-      title: "Vector Art & Apparel Merch",
-      client: "Streetwear Apparel & Digital Character Art",
-      year: "Year 2024 – 2026",
-      desc: "Expressive vector character illustration, smooth bezier line control, urban apparel fabric mockups, and stylized pop-culture aesthetics.",
-      bullets: [
-        "Vector Line Art & Dynamic Cel-Shading",
-        "Garment-Dyed Sweatshirt & Tee Mockups",
-        "Contemporary Pop Character Illustrations"
-      ],
-      img1: "assets/images/my-artwork/thumbs/vector_character_01.jpg",
-      caption1: "Vector Character",
-      img2: "assets/images/my-artwork/thumbs/merch_sweatshirt_front.jpg",
-      caption2: "Streetwear Merch",
-      projectId: 13
+      img1: "assets/images/my-artwork/thumbs/coffee_milk_poster.jpg",
+      caption1: "Café Storia 3D Cups",
+      img2: "assets/images/my-artwork/thumbs/culinary_festival_poster.jpg",
+      caption2: "Real Estate Flyer",
+      projectId: 5
     },
     {
       category: "WorldSkills Manila 2025",
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
       caption1: "WorldSkills A1 Poster",
       img2: "assets/images/worldskills/thumbs/wsa_m3_box_mockup.jpg",
       caption2: "3D Packaging Box",
-      projectId: 18
+      projectId: 21
     }
   ];
 
@@ -495,13 +495,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .map(color => `<span class="palette-swatch" data-hex="${color}" style="background-color: ${color};" title="Click to copy ${color}"></span>`)
         .join('');
 
+      const isVideo = !!project.video;
+      const mediaBadge = isVideo
+        ? `<div style="position:absolute; top:12px; left:12px; background:rgba(4,9,138,0.9); color:#fff; font-family:var(--mono); font-size:10px; font-weight:700; padding:4px 8px; border-radius:4px; display:flex; align-items:center; gap:5px; z-index:3; backdrop-filter:blur(4px); box-shadow:0 2px 8px rgba(0,0,0,0.3);"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg> VIDEO</div>`
+        : '';
+
       card.innerHTML = `
         <div class="card-media-wrapper">
           <img src="${project.thumb}" alt="${project.title}" loading="lazy">
+          ${mediaBadge}
           <div class="card-overlay-hover">
             <span class="inspect-btn">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-              <span>INSPECT ASSETS</span>
+              <span>${isVideo ? 'WATCH DOCUMENTARY' : 'INSPECT ASSETS'}</span>
             </span>
           </div>
         </div>
@@ -859,8 +865,18 @@ document.addEventListener('DOMContentLoaded', () => {
     activeLightboxIndex = (index + portfolioProjects.length) % portfolioProjects.length;
     const project = portfolioProjects[activeLightboxIndex];
 
-    lightboxActiveImg.src = project.image;
-    lightboxActiveImg.alt = project.title;
+    if (project.video) {
+      lightboxImgContainer.innerHTML = `
+        <video controls autoplay playsinline class="lightbox-video" poster="${project.image}" style="max-width:100%; max-height:75vh; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.6); outline:none;">
+          <source src="${project.video}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      `;
+    } else {
+      lightboxImgContainer.innerHTML = `<img src="${project.image}" alt="${project.title}" class="lightbox-image" id="lightboxActiveImg">`;
+    }
+    const currentImg = document.getElementById('lightboxActiveImg');
+
     lightboxCounter.textContent = `${String(activeLightboxIndex + 1).padStart(2, '0')} / ${String(portfolioProjects.length).padStart(2, '0')}`;
     lightboxProjectTitle.textContent = project.title;
     lightboxDesc.textContent = project.details || project.summary;
@@ -890,7 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .join('');
 
     isZoomed = false;
-    lightboxActiveImg.classList.remove('zoomed');
+    if (currentImg) currentImg.classList.remove('zoomed');
 
     lightboxModal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -907,8 +923,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const client = item.client || fallbackClient || 'Official Event';
     const tools = item.tools || ['Competition Stage', 'Engineering & Speech', 'Live Presentation'];
 
-    lightboxActiveImg.src = img;
-    lightboxActiveImg.alt = title;
+    lightboxImgContainer.innerHTML = `<img src="${img}" alt="${title}" class="lightbox-image" id="lightboxActiveImg">`;
+    const currentImg = document.getElementById('lightboxActiveImg');
+
     lightboxCounter.textContent = `COMPETITION ${String(idx + 1).padStart(2, '0')} / ${String(competitionGalleryItems.length).padStart(2, '0')}`;
     lightboxProjectTitle.textContent = title;
     lightboxDesc.textContent = desc;
@@ -934,7 +951,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxTools.innerHTML = tools.map(t => `<span>${t}</span>`).join('');
 
     isZoomed = false;
-    lightboxActiveImg.classList.remove('zoomed');
+    if (currentImg) currentImg.classList.remove('zoomed');
 
     lightboxModal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -961,6 +978,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeLightbox() {
     if (!lightboxModal) return;
+    const v = lightboxModal.querySelector('video');
+    if (v) v.pause();
     playUiSound(420, 'sine', 0.08);
     lightboxModal.classList.remove('active');
     document.body.style.overflow = '';

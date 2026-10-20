@@ -493,8 +493,19 @@ document.addEventListener('DOMContentLoaded', () => {
     pauseAutoplay('PAUSED FOR INSPECTION');
     playBeep(680, 'sine', 0.1);
 
+    const mediaWrap = lightbox.querySelector('.lightbox-media-wrap');
+
     if (project) {
-      if (lightboxMediaImg) lightboxMediaImg.src = project.image || project.thumb || fallbackImg;
+      if (project.video && mediaWrap) {
+        mediaWrap.innerHTML = `
+          <video controls autoplay playsinline class="lightbox-video" poster="${project.image || project.thumb}" style="max-width:100%; max-height:75vh; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.6); outline:none;">
+            <source src="${project.video}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+      } else if (mediaWrap) {
+        mediaWrap.innerHTML = `<img src="${project.image || project.thumb || fallbackImg}" alt="Artwork Preview" id="lightboxMediaImg">`;
+      }
       if (lightboxCategory) lightboxCategory.textContent = (project.category || 'DESIGN').toUpperCase();
       if (lightboxClient) lightboxClient.textContent = project.client || 'Client Project';
       if (lightboxTitle) lightboxTitle.textContent = project.title;
@@ -519,11 +530,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     } else {
-      if (lightboxMediaImg) lightboxMediaImg.src = fallbackImg;
+      if (mediaWrap) {
+        mediaWrap.innerHTML = `<img src="${fallbackImg}" alt="Artwork Preview" id="lightboxMediaImg">`;
+      }
       if (lightboxCategory) lightboxCategory.textContent = fallbackCat ? fallbackCat.toUpperCase() : 'GRAPHIC DESIGN';
       if (lightboxClient) lightboxClient.textContent = fallbackClient || 'Pauv Soneasa Portfolio';
       if (lightboxTitle) lightboxTitle.textContent = fallbackTitle || 'Creative Showcase';
-      if (lightboxDesc) lightboxDesc.textContent = fallbackDesc || 'High-resolution commercial creative asset crafted by Pauv Soneasa for brand campaigns, social media, and digital print.';
+      if (lightboxDesc) lightboxDesc.textContent = fallbackDesc || 'High-resolution commercial creative asset crafted by Sok Sereyisal & Pauv Soneasa for brand campaigns, social media, and digital print.';
       if (lightboxPalette) lightboxPalette.innerHTML = '<span class="lightbox-swatch" style="background-color: #04098a;"></span><span class="lightbox-swatch" style="background-color: #38bdf8;"></span><span class="lightbox-swatch" style="background-color: #ffffff;"></span>';
     }
 
@@ -534,10 +547,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeLightbox() {
     if (!lightbox) return;
     playBeep(450, 'sine', 0.08);
+    const v = lightbox.querySelector('video');
+    if (v) {
+      try { v.pause(); } catch(e) {}
+    }
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
     scheduleInactivityResume();
   }
+
+  window.openProjectLightboxById = function(id) {
+    const projectsList = (typeof portfolioProjects !== 'undefined') ? portfolioProjects : (window.portfolioProjects || null);
+    if (!projectsList) return;
+    const project = projectsList.find(p => String(p.id) === String(id));
+    if (project) {
+      openLightbox(project);
+    }
+  };
 
   if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
   if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
