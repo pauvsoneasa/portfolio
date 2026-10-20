@@ -224,89 +224,89 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- 6. Interactive Editorial Slide Deck Engine (Ryan Saputra Style) ----
   const editorialSlides = [
     {
-      category: "Design Feed & Story",
-      title: "Design Feed & Story",
-      client: "Borann Center, BG Cream & Socheat Skin Care",
+      category: "Campaigns & Packaging",
+      title: "Commercial Campaign & Packaging",
+      client: "Cheese Corn Cambodia & Modern Matcha",
       year: "Year 2024 – 2026",
-      desc: "Multi-channel high-engagement promotional carousels, feed banners, and story sets engineered with high-impact product cutouts, typography hierarchy, and cosmetic color staging.",
+      desc: "High-energy commercial snack packaging and promotional poster campaign designed with bold typography, savory cheese corn product staging, and vibrant color psychology.",
       bullets: [
-        "Instagram & Facebook Feed Posters",
-        "Story Retouching & Carousel Staging",
-        "Commercial Cosmetic Packaging Layouts"
+        "Portrait Campaign Posters & Billboards",
+        "Commercial Snack Packaging Headers",
+        "Retail Storefront & Social Feed Creatives"
       ],
-      img1: "assets/artworks/thumbs/artwork_03_thumb.jpg",
-      caption1: "Feed Poster",
-      img2: "assets/artworks/thumbs/artwork_05_thumb.jpg",
-      caption2: "Story Layout",
+      img1: "assets/images/my-artwork/thumbs/cheese_corn_portrait_01.jpg",
+      caption1: "Commercial Campaign",
+      img2: "assets/images/my-artwork/thumbs/matcha_drink_poster.jpg",
+      caption2: "Beverage Poster",
       projectId: 1
     },
     {
-      category: "Design Logo & Brand",
+      category: "Brand Identity & Logos",
       title: "Design Logo & Brand",
-      client: "CSL Travel, BRT Home Solutions & Corporate Identity",
+      client: "Frame Station Creative Studio & Organic Cosmetics",
       year: "Year 2024 – 2026",
-      desc: "Minimalist vector identity systems, executive business cards with foil accents, legal digital company stamps, and complete corporate stationery standards.",
+      desc: "Precision geometric logo systems, botanical identity marks, negative space construction, and complete corporate stationery standards.",
       bullets: [
-        "Vector Master Logomarks & Rubber Stamps",
-        "Executive Business Cards & RFID Badges",
+        "Vector Master Logomarks & Emblems",
+        "Geometric Construction & Grid Systems",
         "Corporate Stationery Brand Guidelines"
       ],
-      img1: "assets/artworks/thumbs/artwork_18_thumb.jpg",
-      caption1: "Vector Logotype",
-      img2: "assets/artworks/thumbs/artwork_17_thumb.jpg",
-      caption2: "Executive Identity",
-      projectId: 16
+      img1: "assets/images/my-artwork/thumbs/logo_frame_station.jpg",
+      caption1: "Geometric Mark",
+      img2: "assets/images/my-artwork/thumbs/logo_organic_cosmetics.jpg",
+      caption2: "Botanical Logo",
+      projectId: 6
     },
     {
-      category: "Brochures & Print",
-      title: "Brochures & Editorial Print",
-      client: "CSL Travel & Tours & BRT Home Solutions",
+      category: "Ceremony & Institutional Print",
+      title: "Ceremony & Editorial Print",
+      client: "Happy Chandara Academic Council & FABLAB STEM",
       year: "Year 2024 – 2026",
-      desc: "Prepress-ready print collateral, multi-fold corporate brochures, service rate sheets, and international flight tour itinerary decks with CMYK offset specifications.",
+      desc: "Prepress-ready commemorative ceremony suites, 4-panel milestone graduation graphics, academic event programs, and bilingual technical STEM posters.",
       bullets: [
-        "Tri-fold Corporate & Tourism Brochures",
-        "Multi-Page Flight & Tour Itineraries",
+        "4-Panel Milestone Graduation Posters",
+        "Commemorative Programs & Stage Backdrops",
         "Prepress CMYK Print Separation"
       ],
-      img1: "assets/artworks/thumbs/artwork_04_thumb.jpg",
-      caption1: "Tri-fold Leaflet",
-      img2: "assets/artworks/thumbs/artwork_08_thumb.jpg",
-      caption2: "Corporate Brochure",
+      img1: "assets/images/my-artwork/thumbs/graduation_ceremony_01.jpg",
+      caption1: "Graduation Suite",
+      img2: "assets/images/my-artwork/thumbs/fablab_stem_poster.jpg",
+      caption2: "STEM Innovation Poster",
+      projectId: 8
+    },
+    {
+      category: "Culinary & Digital Advertising",
+      title: "Culinary & Digital Advertising",
+      client: "Asian Food Fair & Cafe Beverage Series",
+      year: "Year 2024 – 2026",
+      desc: "Mouth-watering culinary advertising, widescreen digital billboard banners, espresso beverage posters, and high-engagement social promotion.",
+      bullets: [
+        "Landscape Digital Billboard Displays",
+        "Culinary Lighting & Food Poster Layouts",
+        "High-Engagement Cafe Promotion Creatives"
+      ],
+      img1: "assets/images/my-artwork/thumbs/cheese_corn_landscape_01.jpg",
+      caption1: "Digital Billboard",
+      img2: "assets/images/my-artwork/thumbs/coffee_milk_poster.jpg",
+      caption2: "Coffee Milk Poster",
       projectId: 2
     },
     {
-      category: "Photo & Packaging",
-      title: "Photo & Packaging",
-      client: "Kroung Meung Spices & Tbal Khmer Culinary",
+      category: "Vector Art & Apparel Merch",
+      title: "Vector Art & Apparel Merch",
+      client: "Streetwear Apparel & Digital Character Art",
       year: "Year 2024 – 2026",
-      desc: "Mouth-watering culinary photo styling, retail supermarket shelf packaging headers, authentic spice paste labels, and high-frequency cosmetic skin retouching.",
+      desc: "Expressive vector character illustration, smooth bezier line control, urban apparel fabric mockups, and stylized pop-culture aesthetics.",
       bullets: [
-        "FMCG Supermarket Packaging & Shelf Headers",
-        "Culinary Lighting & Food Retouching",
-        "Product Cutouts & High-Frequency Staging"
+        "Vector Line Art & Dynamic Cel-Shading",
+        "Garment-Dyed Sweatshirt & Tee Mockups",
+        "Contemporary Pop Character Illustrations"
       ],
-      img1: "assets/artworks/thumbs/artwork_13_thumb.jpg",
-      caption1: "Supermarket Packaging",
-      img2: "assets/artworks/thumbs/artwork_06_thumb.jpg",
-      caption2: "Culinary Photo Styling",
-      projectId: 11
-    },
-    {
-      category: "Art & Vector",
-      title: "Art & Vector",
-      client: "National Heritage Series & Sabara Angkor Luxury",
-      year: "Year 2024 – 2026",
-      desc: "Regal Cambodian cultural tributes, classical golden filigree ornaments, royal crest vector modernization, and large-format architectural event backdrops.",
-      bullets: [
-        "Khmer Royal Crests & Traditional Filigree",
-        "Visak Bochea & Civic Festival Artworks",
-        "Large-Format Stage Backdrops & X-Stands"
-      ],
-      img1: "assets/artworks/thumbs/artwork_09_thumb.jpg",
-      caption1: "Khmer Heritage Art",
-      img2: "assets/artworks/thumbs/artwork_12_thumb.jpg",
-      caption2: "Luxury Gala Backdrop",
-      projectId: 7
+      img1: "assets/images/my-artwork/thumbs/vector_character_01.jpg",
+      caption1: "Vector Character",
+      img2: "assets/images/my-artwork/thumbs/merch_sweatshirt_front.jpg",
+      caption2: "Streetwear Merch",
+      projectId: 13
     },
     {
       category: "WorldSkills Manila 2025",

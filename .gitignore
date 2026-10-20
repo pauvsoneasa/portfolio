@@ -11,3 +11,6 @@ ehthumbs.db
 
 # Nested repos & scratch
 portfolio/
+
+# Raw Local Source Assets (over GitHub 100MB file limit; web-ready assets live in assets/images/my-artwork/)
+assets/My-artwork/

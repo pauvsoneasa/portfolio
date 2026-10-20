@@ -2,7 +2,7 @@
 
 Official responsive web portfolio for **Pauv Soneasa**, Computer Multimedia Designer (Year 3) at BELTEI International University (Campus 1).
 
-Featuring commercial branding systems, social media advertising campaigns, print collateral, and event signage created in creative partnership with **SOK SEREYVISAL**.
+Featuring commercial branding systems, snack packaging suites, institutional print collateral, streetwear merchandise, and official WorldSkills ASEAN Manila 2025 competition test package modules.
 
 ## 🎨 Design & Technology
 - **Main Accent**: Electric Sky Light Blue (`#38bdf8` / `#0ea5e9` / `#7dd3fc`)
@@ -42,12 +42,20 @@ Featuring commercial branding systems, social media advertising campaigns, print
 ## 📁 Directory Structure
 ```
 ├── index.html            # Main semantic HTML5 webpage
+├── deck.html             # Full-screen auto-playing editorial design deck
 ├── style.css             # Light-blue modern design system & glassmorphism
+├── deck.css              # Device-frame presentation styles
 ├── script.js             # Interactive engine, live clock, sound & lightbox
-├── projects-data.js      # Structured portfolio catalogue & CV data
+├── deck.js               # Deck slide transition & autoplay engine
+├── projects-data.js      # Structured portfolio catalogue & authentic project data
 ├── assets/
-│   ├── profile/          # Pauv Soneasa portrait
-│   └── artworks/         # 17 full-resolution artworks & thumbnails
+│   ├── profile/          # Pauv Soneasa portrait & renders
+│   ├── images/
+│   │   ├── my-artwork/   # Authentic personal design artworks (web & thumbs)
+│   │   ├── worldskills/  # WorldSkills ASEAN Manila 2025 competition package
+│   │   ├── competitions/ # National Robotics & Youth Summer Camp
+│   │   └── summer camp/  # Summer camp leadership assets
+│   └── audio/            # Background audio track
 ├── .nojekyll             # Bypasses Jekyll for GitHub Pages
 └── README.md             # Documentation
 ```
