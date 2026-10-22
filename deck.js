@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 15 Presentation Slides Metadata for Figma/Keynote Filmstrip Tray
   const filmstripData = [
     { num: 1, title: 'MY PORT-FOLIO 2026', cat: 'TITLE', thumb: './assets/profile/pauv_presenter_cutout.png' },
-    { num: 2, title: 'About Pauv Soneasa', cat: 'BIO & LEADERSHIP', thumb: './assets/profile/pauv_standing_bw.png' },
+    { num: 2, title: 'About Pauv Soneasa', cat: 'BIO & LEADERSHIP', thumb: './assets/profile/pauv_standing_cutout.png' },
     { num: 3, title: 'Commercial Campaigns', cat: 'CAMPAIGN', thumb: './assets/images/my-artwork/thumbs/cheese_corn_portrait_01.jpg' },
     { num: 4, title: 'Product Photography', cat: 'PHOTO & RETOUCH', thumb: './assets/images/my-artwork/thumbs/cheese_corn_landscape_01.jpg' },
     { num: 5, title: 'Competitions & Honors', cat: 'AWARDS & STEM', thumb: './assets/images/competitions/thumbs/robotic_img_7829.jpg' },
